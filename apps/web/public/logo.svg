@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 248 34" fill="none">
+  <!-- Gold diamond accent -->
+  <path d="M14 11L20 17L14 23L8 17Z" fill="#C2A257"/>
+
+  <!-- Short separator between diamond and text -->
+  <line x1="26" y1="17" x2="32" y2="17" stroke="white" stroke-width="0.6" stroke-opacity="0.4"/>
+
+  <!-- MARTYNA RYDLICKA -->
+  <text
+    x="38"
+    y="15"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="12"
+    font-weight="400"
+    textLength="202"
+    lengthAdjust="spacing"
+    fill="white"
+  >MARTYNA RYDLICKA</text>
+
+  <!-- NAILS subtitle -->
+  <text
+    x="39"
+    y="28"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="8.5"
+    textLength="70"
+    lengthAdjust="spacing"
+    fill="#C2A257"
+  >NAILS</text>
+</svg>

@@ -19,6 +19,8 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
+        "gold-fill":
+          "relative isolate overflow-hidden rounded-none border-gold/60 font-light tracking-wide text-gold transition-colors duration-500 before:absolute before:inset-0 before:z-[-1] before:-translate-x-full before:bg-gold before:transition-transform before:duration-500 before:ease-out hover:text-black hover:before:translate-x-0 focus-visible:border-gold/60 focus-visible:ring-2 focus-visible:ring-gold/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black",
       },
       size: {
         default:
@@ -34,6 +36,13 @@ const buttonVariants = cva(
         "icon-lg": "size-9",
       },
     },
+    compoundVariants: [
+      {
+        variant: "gold-fill",
+        size: "default",
+        className: "h-auto gap-0 px-6 py-2.5 text-sm",
+      },
+    ],
     defaultVariants: {
       variant: "default",
       size: "default",
