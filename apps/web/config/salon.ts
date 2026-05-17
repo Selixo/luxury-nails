@@ -17,8 +17,8 @@ export const SALON = {
   },
 
   geo: {
-    latitude: 51.9801,
-    longitude: 15.6882,
+    latitude: 51.9942614,
+    longitude: 15.7908705,
   },
 
   openingHours: [
