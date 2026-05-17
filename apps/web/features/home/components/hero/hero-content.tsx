@@ -14,11 +14,8 @@ export function HeroContent() {
         </span>
       </p>
 
-      <p
-        aria-label="Ekskluzywny salon, Klenica"
-        className="mb-4 animate-fade-up text-xs font-light tracking-[0.3em] text-gold uppercase animation-duration-[0.8s] [animation-delay:0.3s] md:mb-5"
-      >
-        <span aria-hidden="true">Ekskluzywny salon · Klenica</span>
+      <p className="mb-4 animate-fade-up text-xs font-light tracking-[0.3em] text-gold uppercase animation-duration-[0.8s] [animation-delay:0.3s] md:mb-5">
+        Ekskluzywny salon · Klenica
       </p>
 
       <div
@@ -38,7 +35,7 @@ export function HeroContent() {
         każdy detal — od pierwszego pędzla po wykończenie.
       </p>
 
-      <p className="mb-10 max-w-xs animate-fade-up text-sm leading-relaxed font-light text-white/35 animation-duration-[0.9s] [animation-delay:0.95s] md:mb-12 md:max-w-md">
+      <p className="mb-10 max-w-xs animate-fade-up text-sm leading-relaxed font-light text-white/47 animation-duration-[0.9s] [animation-delay:0.95s] md:mb-12 md:max-w-md">
         Zbieraj punkty i odkrywaj ekskluzywne przywileje programu VIP.
       </p>
 

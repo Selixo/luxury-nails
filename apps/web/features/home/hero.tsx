@@ -8,10 +8,7 @@ import { HeroScrollIndicator } from "./components/hero/hero-scroll-indicator"
 
 export function Hero() {
   return (
-    <section
-      aria-labelledby="hero-heading"
-      className="relative flex min-h-svh flex-col overflow-hidden"
-    >
+    <header className="relative flex min-h-svh flex-col overflow-hidden">
       <HeroBackground />
       <CornerAccent position="top-left" />
       <CornerAccent position="bottom-right" />
@@ -20,6 +17,6 @@ export function Hero() {
       <HeroContent />
       <HeroStats />
       <HeroScrollIndicator />
-    </section>
+    </header>
   )
 }

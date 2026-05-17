@@ -2,6 +2,7 @@ import { Cormorant_Garamond, Geist, Geist_Mono } from "next/font/google"
 
 import "@workspace/ui/globals.css"
 import { Providers } from "@/components/providers"
+import { SkipToContent } from "@/components/ui/skip-to-content"
 import { SocialSidebar } from "@/components/social-sidebar"
 import { StickyNav } from "@/components/sticky-nav"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -28,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="pl"
       suppressHydrationWarning
       className={cn(
         "antialiased",
@@ -39,10 +40,14 @@ export default function RootLayout({
       )}
     >
       <body>
+        <SkipToContent />
+
+        <StickyNav />
+
         <Providers>
           <ThemeProvider>{children}</ThemeProvider>
         </Providers>
-        <StickyNav />
+
         <SocialSidebar />
       </body>
     </html>
