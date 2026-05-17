@@ -35,7 +35,7 @@ export function HeroContent() {
         każdy detal — od pierwszego pędzla po wykończenie.
       </p>
 
-      <p className="mb-10 max-w-xs animate-fade-up text-sm leading-relaxed font-light text-white/47 animation-duration-[0.9s] [animation-delay:0.95s] md:mb-12 md:max-w-md">
+      <p className="mb-6 max-w-xs animate-fade-up text-sm leading-relaxed font-light text-white/47 animation-duration-[0.9s] [animation-delay:0.95s] md:mb-12 md:max-w-md">
         Zbieraj punkty i odkrywaj ekskluzywne przywileje programu VIP.
       </p>
 

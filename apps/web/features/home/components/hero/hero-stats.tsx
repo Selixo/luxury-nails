@@ -3,7 +3,7 @@ import { STATS } from "../../config/home.constants"
 
 export function HeroStats() {
   return (
-    <div className="relative z-10 mx-auto w-full max-w-4xl animate-fade-up px-6 pt-4 pb-16 animation-duration-[1s] [animation-delay:1.3s]">
+    <div className="relative z-10 mx-auto w-full max-w-4xl animate-fade-up px-6 pt-8 pb-14 animation-duration-[1s] [animation-delay:1.3s] sm:pt-4 sm:pb-16">
       <dl>
         <div className="flex items-center justify-center">
           {STATS.map((stat, i) => (
