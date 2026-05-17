@@ -10,7 +10,8 @@
 @theme inline {
   --font-heading: var(--font-sans);
   --font-display: var(--font-display);
-  --text-xxs: 0.625rem; /* 10px */
+  --text-xxs: 0.625rem;
+  --color-background-alt: oklch(14.077% 0.0044 285.776);
   --color-gold: oklch(0.72 0.1 85);
   --color-gold-muted: oklch(0.72 0.1 85 / 60%);
   --color-sidebar-ring: var(--sidebar-ring);
