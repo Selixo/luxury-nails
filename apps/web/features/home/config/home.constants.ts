@@ -87,3 +87,50 @@ export const SOCIAL_LINKS = [
   { label: "Facebook", href: "#", icon: Facebook },
   { label: "TikTok", href: "#", icon: TikTok },
 ]
+
+export type Review = {
+  author: string
+  avatar?: string
+  rating: number
+  text: string
+  date: string
+  service: string
+}
+
+export const REVIEWS: Review[] = [
+  {
+    author: "Aleksandra W.",
+    rating: 5,
+    text: "Absolutnie najlepszy salon, w jakim byłam. Hybryd trzyma się idealnie już od czterech tygodni, a efekt wygląda jak pierwszego dnia. Polecam każdej, która szuka prawdziwej jakości.",
+    date: "Kwiecień 2025",
+    service: "Manicure hybrydowy",
+  },
+  {
+    author: "Karolina M.",
+    rating: 5,
+    text: "Wyjątkowe podejście do klientki i niesamowita precyzja. Zamówiłam nail art i byłam w szoku, jak dokładnie zostało wykonane. Efekt przeszedł moje oczekiwania — na pewno wracam!",
+    date: "Marzec 2025",
+    service: "Nail Art",
+  },
+  {
+    author: "Natalia B.",
+    rating: 5,
+    text: "Rezerwacja przez internet jest super wygodna, zero czekania. Salon jest przepiękny, a obsługa niesamowita w swoim fachu. Moje paznokcie nigdy nie wyglądały tak pięknie.",
+    date: "Marzec 2025",
+    service: "Manicure żelowy",
+  },
+  {
+    author: "Monika P.",
+    rating: 5,
+    text: "Przyszłam po raz pierwszy i zostałam na stałe. Profesjonalizm, czystość, miła atmosfera i efekt, który zachwyca moje koleżanki. Nie wyobrażam sobie teraz innego salonu.",
+    date: "Luty 2025",
+    service: "Przedłużanie paznokci",
+  },
+  {
+    author: "Zuzanna K.",
+    rating: 5,
+    text: "Świetne doradztwo i wykonanie na najwyższym poziomie. Pomoc w wyborze idealnego koloru i wzoru pod mój styl. Wynik piękny, elegancki i trwały — wracam regularnie.",
+    date: "Luty 2025",
+    service: "Manicure hybrydowy",
+  },
+]
