@@ -6,7 +6,7 @@ export function Experience() {
   return (
     <section
       id="doswiadczenie"
-      className="relative bg-background-alt px-6 py-12 md:px-12 md:py-28 lg:px-20 lg:py-32"
+      className="relative scroll-mt-20 bg-background-alt px-6 py-12 md:px-12 md:py-28 lg:px-20 lg:py-32"
     >
       <ExperienceHeader />
 
