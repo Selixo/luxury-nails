@@ -59,7 +59,7 @@ export const HeroNavigation = () => {
         <SheetContent
           side="left"
           showCloseButton={false}
-          className="w-full border-none bg-black/95 px-8 py-10 backdrop-blur-md sm:w-80"
+          className="!w-[90%] border-none bg-black/95 px-8 py-10 backdrop-blur-md"
         >
           <SheetTitle className="sr-only">Menu nawigacji</SheetTitle>
 
