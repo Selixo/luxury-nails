@@ -2,9 +2,9 @@ export function HeroScrollIndicator() {
   return (
     <a
       href="#doswiadczenie"
-      aria-label="Przewiń do kolejnej sekcji"
-      className="group relative z-10 hidden animate-fade-up flex-col items-center gap-2 self-center pb-8 animation-duration-[1s] [animation-delay:2s] md:flex"
+      aria-hidden="true"
       tabIndex={-1}
+      className="group relative z-10 hidden animate-fade-up flex-col items-center gap-2 self-center pb-8 animation-duration-[1s] [animation-delay:2s] md:flex"
     >
       <span className="text-[8px] tracking-[0.25em] text-white/25 uppercase transition-colors duration-300 group-hover:text-gold/60">
         Odkryj

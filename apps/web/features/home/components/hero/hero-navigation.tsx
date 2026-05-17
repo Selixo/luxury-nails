@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useScrollThreshold } from "@/hooks/useScrollThreshold"
 import { X } from "lucide-react"
 import {
   Sheet,
@@ -17,6 +18,7 @@ import { Button } from "@workspace/ui/components/button"
 
 export const HeroNavigation = () => {
   const [menuOpen, setMenuOpen] = useState(false)
+  const stickyVisible = useScrollThreshold(80)
 
   useOnMediaQueryMatch({
     query: "(min-width: 1024px)",
@@ -25,7 +27,11 @@ export const HeroNavigation = () => {
 
   return (
     <>
-      <nav className="relative z-20 flex animate-fade-down items-center justify-between px-6 py-6 md:px-10 md:py-7">
+      <nav
+        aria-hidden={stickyVisible}
+        inert={stickyVisible}
+        className="relative z-20 flex animate-fade-down items-center justify-between px-6 py-6 md:px-10 md:py-7"
+      >
         <Logo />
 
         <ul className="hidden items-center gap-10 lg:flex">
