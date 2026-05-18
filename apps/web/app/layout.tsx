@@ -6,7 +6,9 @@ import { SALON } from "@/config/salon"
 import { JsonLd } from "@/components/seo/json-ld"
 import { Providers } from "@/components/providers"
 import { SkipToContent } from "@/components/ui/skip-to-content"
+import { CookieConsent } from "@/components/cookie-consent"
 import { Footer } from "@/components/footer"
+import { GoogleAnalytics } from "@/components/google-analytics"
 import { SocialSidebar } from "@/components/social-sidebar"
 import { StickyNav } from "@/components/sticky-nav"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -122,7 +124,9 @@ export default function RootLayout({
           <ThemeProvider>{children}</ThemeProvider>
         </Providers>
 
+        <GoogleAnalytics />
         <Footer />
+        <CookieConsent />
         <SocialSidebar />
       </body>
     </html>

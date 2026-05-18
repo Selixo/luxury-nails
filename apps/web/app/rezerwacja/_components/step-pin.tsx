@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react"
 
 const PIN_LENGTH = 6
 const RESEND_COOLDOWN = 30
+const DEV_PIN = "123456" // tymczasowy PIN do testów UI — usuń gdy backend gotowy
 
 type Props = {
   phone: string
@@ -68,7 +69,10 @@ export function StepPin({ phone, onVerified, onBack }: Props) {
       setError("Wpisz pełny 6-cyfrowy kod PIN.")
       return
     }
-    // UI-only placeholder
+    if (pin.join("") !== DEV_PIN) {
+      setError(`Nieprawidłowy kod. (testowy PIN: ${DEV_PIN})`)
+      return
+    }
     // W przyszłości: POST /api/auth/verify-pin
     onVerified()
   }
