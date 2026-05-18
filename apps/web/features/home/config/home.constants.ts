@@ -5,7 +5,7 @@ import TikTok from "@/public/icons/tiktok.svg"
 export const NAV_LINKS = [
   { label: "Doświadczenie", href: "#doswiadczenie" },
   { label: "Galeria", href: "#galeria" },
-  { label: "Program VIP", href: "#vip" },
+  { label: "Cennik", href: "#cennik" },
   { label: "Opinie", href: "#opinie" },
   { label: "Lokalizacja", href: "#lokalizacja" },
 ]
@@ -57,16 +57,16 @@ export const EXPERIENCE_ITEMS: ExperienceItem[] = [
   },
   {
     number: "03",
-    tag: "Ekskluzywnie",
+    tag: "Najwyższa jakość",
     icon: "star",
-    badge: { value: "VIP", label: "Program" },
-    title: "Nagrody za lojalność",
+    badge: { value: "100%", label: "Jakość" },
+    title: "Sprawdzone materiały",
     description:
-      "Zbieraj punkty za każdą wizytę. Odkrywaj nagrody i przywileje zarezerwowane wyłącznie dla naszych stałych klientek.",
-    features: ["Punkty za wizytę", "Ekskluzywne nagrody", "Darmowe usługi"],
+      "Pracuję wyłącznie na produktach renomowanych marek. Twoje paznokcie są w dobrych rękach — od preparacji po ostatni detal.",
+    features: ["Marki premium", "Trwały efekt", "Bezpieczne składniki"],
     image: "/experiences/nails-vip.png",
     imageAlt:
-      "Program VIP — ekskluzywne nagrody dla stałych klientek Luxury Nails",
+      "Produkty premium używane w Luxury Nails — jakość i bezpieczeństwo",
   },
   {
     number: "04",
@@ -79,6 +79,186 @@ export const EXPERIENCE_ITEMS: ExperienceItem[] = [
     features: ["Poprzednie stylizacje", "Ulubione wzory", "Twoja ewolucja"],
     image: "/experiences/nails-history.png",
     imageAlt: "Historia wizyt — przeglądaj swoje stylizacje w Luxury Nails",
+  },
+]
+
+export type PricingItem = {
+  name: string
+  price: string
+}
+
+export type PricingCategory = {
+  id: string
+  label: string
+  items: PricingItem[]
+}
+
+export type GalleryCategory =
+  | "hybryda"
+  | "zel"
+  | "nail-art"
+  | "przedluzanie"
+  | "manicure"
+
+export type GallerySize = "normal" | "tall"
+
+export type GalleryItem = {
+  id: string
+  src?: string
+  alt: string
+  category: GalleryCategory
+  size: GallerySize
+  service: string
+}
+
+export const GALLERY_FILTERS = [
+  { id: "all" as const, label: "Wszystkie" },
+  { id: "hybryda" as const, label: "Hybryda" },
+  { id: "zel" as const, label: "Żel" },
+  { id: "nail-art" as const, label: "Nail Art" },
+  { id: "przedluzanie" as const, label: "Przedłużanie" },
+  { id: "manicure" as const, label: "Manicure" },
+] as const
+
+export const GALLERY_ITEMS: GalleryItem[] = [
+  {
+    id: "g01",
+    src: "https://picsum.photos/seed/nails-french/600/900",
+    alt: "Manicure hybrydowy french",
+    category: "hybryda",
+    size: "tall",
+    service: "Hybryda French",
+  },
+  {
+    id: "g02",
+    src: "https://picsum.photos/seed/nails-nude/800/600",
+    alt: "Żel na naturalną płytkę nude",
+    category: "zel",
+    size: "normal",
+    service: "Żel nude",
+  },
+  {
+    id: "g03",
+    src: "https://picsum.photos/seed/nails-art3d/600/900",
+    alt: "Nail art kwiaty 3D",
+    category: "nail-art",
+    size: "tall",
+    service: "Nail Art 3D",
+  },
+  {
+    id: "g04",
+    src: "https://picsum.photos/seed/nails-tips/800/600",
+    alt: "Przedłużanie tipsami mleczne",
+    category: "przedluzanie",
+    size: "normal",
+    service: "Przedłużanie tipsami",
+  },
+  {
+    id: "g05",
+    src: "https://picsum.photos/seed/nails-classic/800/600",
+    alt: "Manicure klasyczny czerwony",
+    category: "manicure",
+    size: "normal",
+    service: "Manicure klasyczny",
+  },
+  {
+    id: "g06",
+    src: "https://picsum.photos/seed/nails-chrome/800/600",
+    alt: "Hybryda z pyłkiem chrome",
+    category: "hybryda",
+    size: "normal",
+    service: "Hybryda chrome",
+  },
+  {
+    id: "g07",
+    src: "https://picsum.photos/seed/nails-ombre/600/900",
+    alt: "Żel z gradientem ombre",
+    category: "zel",
+    size: "tall",
+    service: "Żel ombre",
+  },
+  {
+    id: "g08",
+    src: "https://picsum.photos/seed/nails-gold/800/600",
+    alt: "Nail art geometryczny złoty",
+    category: "nail-art",
+    size: "normal",
+    service: "Nail Art złoty",
+  },
+  {
+    id: "g09",
+    src: "https://picsum.photos/seed/nails-gel-sq/800/600",
+    alt: "Przedłużanie żelem kwadrat",
+    category: "przedluzanie",
+    size: "normal",
+    service: "Przedłużanie żelem",
+  },
+  {
+    id: "g10",
+    src: "https://picsum.photos/seed/nails-manicure/600/900",
+    alt: "Manicure z malowaniem nude",
+    category: "manicure",
+    size: "tall",
+    service: "Manicure nude",
+  },
+  {
+    id: "g11",
+    src: "https://picsum.photos/seed/nails-holo/800/600",
+    alt: "Hybryda z foliami holograficznymi",
+    category: "hybryda",
+    size: "normal",
+    service: "Hybryda folia",
+  },
+  {
+    id: "g12",
+    src: "https://picsum.photos/seed/nails-stones/800/600",
+    alt: "Żel z kamieniami",
+    category: "zel",
+    size: "normal",
+    service: "Żel z kamieniami",
+  },
+]
+
+export const PRICING_CATEGORIES: PricingCategory[] = [
+  {
+    id: "manicure",
+    label: "Manicure",
+    items: [
+      { name: "Manicure klasyczny", price: "od 60 zł" },
+      { name: "Manicure z malowaniem lakierem", price: "od 70 zł" },
+      { name: "Manicure z hybrydą", price: "od 110 zł" },
+      { name: "Ściąganie hybrydy", price: "od 40 zł" },
+    ],
+  },
+  {
+    id: "przedluzanie",
+    label: "Przedłużanie",
+    items: [
+      { name: "Przedłużanie żelem", price: "od 180 zł" },
+      { name: "Przedłużanie na tipsach", price: "od 160 zł" },
+      { name: "Rekonstrukcja / korekta", price: "od 130 zł" },
+      { name: "Ściąganie żelu / tipsów", price: "od 50 zł" },
+    ],
+  },
+  {
+    id: "zele-hybrydy",
+    label: "Żele & Hybrydy",
+    items: [
+      { name: "Żel na naturalną płytkę", price: "od 140 zł" },
+      { name: "Hybryda klasyczna", price: "od 100 zł" },
+      { name: "Hybryda z zdobieniem", price: "od 120 zł" },
+      { name: "Naprawa pojedynczego paznokcia", price: "od 20 zł" },
+    ],
+  },
+  {
+    id: "zdobienia",
+    label: "Zdobienia",
+    items: [
+      { name: "Zdobienie proste (1–2 palce)", price: "od 20 zł" },
+      { name: "Zdobienie kompleksowe", price: "wycena indywidualna" },
+      { name: "Pyłek / folia / efekt chrome", price: "od 15 zł" },
+      { name: "Kamyczki, naklejki", price: "od 10 zł" },
+    ],
   },
 ]
 

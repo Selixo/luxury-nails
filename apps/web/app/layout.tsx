@@ -6,6 +6,7 @@ import { SALON } from "@/config/salon"
 import { JsonLd } from "@/components/seo/json-ld"
 import { Providers } from "@/components/providers"
 import { SkipToContent } from "@/components/ui/skip-to-content"
+import { Footer } from "@/components/footer"
 import { SocialSidebar } from "@/components/social-sidebar"
 import { StickyNav } from "@/components/sticky-nav"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -121,6 +122,7 @@ export default function RootLayout({
           <ThemeProvider>{children}</ThemeProvider>
         </Providers>
 
+        <Footer />
         <SocialSidebar />
       </body>
     </html>

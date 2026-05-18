@@ -36,7 +36,7 @@ export function HeroContent() {
       </p>
 
       <p className="mb-6 max-w-xs animate-fade-up text-sm leading-relaxed font-light text-white/47 animation-duration-[0.9s] [animation-delay:0.95s] md:mb-12 md:max-w-md">
-        Zbieraj punkty i odkrywaj ekskluzywne przywileje programu VIP.
+        Umów wizytę online i ciesz się efektem, który mówi sam za siebie.
       </p>
 
       <div className="relative animate-fade-up animation-duration-[0.9s] [animation-delay:1.1s]">
@@ -53,7 +53,7 @@ export function HeroContent() {
           variant="gold-fill"
           className="border-gold/70 px-8 py-3.5 tracking-widest uppercase md:px-10 md:py-4"
         >
-          <Link href="#rezerwacja">
+          <Link href="/rezerwacja">
             <span className="relative z-10">Zarezerwuj wizytę</span>
           </Link>
         </Button>
