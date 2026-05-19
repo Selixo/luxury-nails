@@ -7,6 +7,7 @@ export const NAV_LINKS = [
   { label: "Galeria", href: "#galeria" },
   { label: "Cennik", href: "#cennik" },
   { label: "Opinie", href: "#opinie" },
+  { label: "O mnie", href: "#o-mnie" },
   { label: "Lokalizacja", href: "#lokalizacja" },
 ]
 
@@ -260,6 +261,63 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
       { name: "Kamyczki, naklejki", price: "od 10 zł" },
     ],
   },
+]
+
+export type AboutStat = {
+  value: string
+  label: string
+  clickable?: boolean
+}
+
+export type CertificateItem = {
+  id: string
+  src?: string
+  alt: string
+  name: string
+  issuer: string
+  year: string
+}
+
+export const CERTIFICATES: CertificateItem[] = [
+  {
+    id: "cert-01",
+    src: "https://picsum.photos/seed/cert-orly/800/600",
+    alt: "Certyfikat szkolenia ORLY Professional",
+    name: "Stylizacja paznokci żelowych",
+    issuer: "ORLY Professional",
+    year: "2024",
+  },
+  {
+    id: "cert-02",
+    src: "https://picsum.photos/seed/cert-cnd/800/600",
+    alt: "Certyfikat szkolenia CND Shellac",
+    name: "Shellac & Vinylux",
+    issuer: "CND",
+    year: "2023",
+  },
+  {
+    id: "cert-03",
+    src: "https://picsum.photos/seed/cert-semilac/800/600",
+    alt: "Certyfikat szkolenia Semilac Academy",
+    name: "Nail Art & Zdobienia",
+    issuer: "Semilac Academy",
+    year: "2023",
+  },
+]
+
+export const ABOUT = {
+  ownerName: "Imię Nazwisko",
+  headline: "Pasja, która stała się rzemiosłem",
+  lead: "Paznokcie to dla mnie nie tylko praca — to forma wyrazu, w której każdy detal ma znaczenie. Od lat tworzę stylizacje, które łączą precyzję z estetyką i są skrojone dokładnie pod potrzeby każdej klientki.",
+  body: "Pracuję wyłącznie na sprawdzonych materiałach renomowanych marek i stale poszerzam swoje umiejętności na certyfikowanych szkoleniach. Każda wizyta to dla mnie nie tylko usługa — to chwila, w której Ty jesteś w centrum uwagi.",
+  image: "/me.png",
+  imageAlt: "Właścicielka Luxury Nails przy pracy",
+}
+
+export const ABOUT_STATS: AboutStat[] = [
+  { value: "5+", label: "Lat doświadczenia" },
+  { value: "100%", label: "Certyfikowane szkolenia", clickable: true },
+  { value: "Klenica", label: "Mała miejscowość, wielka pasja" },
 ]
 
 export const SOCIAL_LINKS = [
