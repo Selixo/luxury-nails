@@ -5,7 +5,7 @@ import { ExperienceItem } from "./components/experience/experience-item"
 export function Experience() {
   return (
     <section
-      id="doswiadczenie"
+      id="experience"
       className="relative scroll-mt-20 bg-background-alt px-6 py-12 md:px-12 md:py-28 lg:px-20 lg:py-32"
     >
       <ExperienceHeader />

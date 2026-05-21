@@ -5,7 +5,7 @@ import { ReviewsCarousel } from "./components/reviews/reviews-carousel"
 export function Reviews() {
   return (
     <section
-      id="opinie"
+      id="reviews"
       aria-labelledby="reviews-heading"
       className="scroll-mt-20 bg-[#09090b] px-6 py-12 md:px-12 md:py-20 lg:px-20 lg:py-28"
     >

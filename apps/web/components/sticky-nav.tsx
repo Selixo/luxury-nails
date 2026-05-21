@@ -1,21 +1,23 @@
 "use client"
 
 import { useState } from "react"
-import { X } from "lucide-react"
+import dynamic from "next/dynamic"
 import Link from "next/link"
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetTitle,
-} from "@workspace/ui/components/sheet"
 import { Button } from "@workspace/ui/components/button"
 import { cn } from "@workspace/ui/lib/utils"
 import { useScrollThreshold } from "@/hooks/useScrollThreshold"
 import { useOnMediaQueryMatch } from "@/hooks/useOnMediaQueryMatch"
-import { NAV_LINKS, SOCIAL_LINKS } from "@/features/home/config/home.constants"
+import { NAV_LINKS } from "@/features/home/config/home.constants"
 import { Logo } from "@/components/ui/logo"
 import { Hamburger } from "@/components/ui/hamburger-button"
+
+const StickyNavMobileMenu = dynamic(
+  () =>
+    import("@/components/sticky-nav-mobile-menu").then(
+      (m) => m.StickyNavMobileMenu
+    ),
+  { ssr: false }
+)
 
 export function StickyNav() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -44,12 +46,12 @@ export function StickyNav() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="group relative py-1 text-xxs tracking-[0.2em] text-white/70 uppercase transition-colors duration-300 hover:text-gold"
+                  className="group relative py-1 text-xxs tracking-[0.2em] text-white/70 uppercase transition-colors duration-300 outline-none hover:text-gold focus-visible:text-gold"
                 >
                   {link.label}
                   <span
                     aria-hidden="true"
-                    className="absolute bottom-0 left-0 h-px w-0 bg-gold/50 transition-all duration-300 group-hover:w-full"
+                    className="absolute bottom-0 left-0 h-px w-0 bg-gold/50 transition-all duration-300 group-hover:w-full group-focus-visible:w-full"
                   />
                 </Link>
               </li>
@@ -75,72 +77,7 @@ export function StickyNav() {
         />
       </nav>
 
-      <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
-        <SheetContent
-          side="left"
-          showCloseButton={false}
-          className="w-[90%]! border-none bg-black/95 px-6 py-10 backdrop-blur-md sm:px-8"
-        >
-          <SheetTitle className="sr-only">Menu nawigacji</SheetTitle>
-          <div className="flex h-full flex-col">
-            <div className="mb-12 flex items-center justify-between">
-              <Logo />
-              <SheetClose asChild>
-                <button
-                  aria-label="Zamknij menu"
-                  className="cursor-pointer text-white/40 transition-colors duration-200 hover:text-gold"
-                >
-                  <X size={18} strokeWidth={1} />
-                </button>
-              </SheetClose>
-            </div>
-
-            <ul className="flex flex-col gap-1">
-              {NAV_LINKS.map((link, i) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="group relative flex animate-fade-right items-center py-4 text-lg font-light tracking-wide text-white/70 transition-colors duration-300 hover:text-gold"
-                    style={{ animationDelay: `${i * 0.07}s` }}
-                  >
-                    <span className="mr-3 text-xxs text-gold">0{i + 1}</span>
-                    {link.label}
-                    <span
-                      aria-hidden="true"
-                      className="absolute bottom-0 left-0 h-px w-0 bg-gold/30 transition-all duration-300 group-hover:w-full"
-                    />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            <ul className="mt-auto mb-6 flex animate-fade-up items-center gap-5 [animation-delay:0.35s]">
-              {SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
-                <li key={label}>
-                  <Link
-                    href={href}
-                    aria-label={label}
-                    className="text-white/50 transition-colors duration-200 hover:text-gold"
-                  >
-                    <Icon width={20} height={20} aria-hidden="true" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            <Button
-              asChild
-              variant="gold-fill"
-              className="w-full animate-fade-up py-4 tracking-widest uppercase [animation-delay:0.4s]"
-            >
-              <Link href="#rezerwacja" onClick={() => setMenuOpen(false)}>
-                Zarezerwuj wizytę
-              </Link>
-            </Button>
-          </div>
-        </SheetContent>
-      </Sheet>
+      <StickyNavMobileMenu open={menuOpen} onOpenChange={setMenuOpen} />
     </>
   )
 }

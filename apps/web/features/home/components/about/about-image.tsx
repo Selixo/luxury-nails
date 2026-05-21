@@ -27,7 +27,7 @@ export function AboutImage({ inView }: Props) {
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -inset-8 hidden opacity-40 blur-3xl lg:block"
+        className="pointer-events-none absolute -inset-8 hidden opacity-30 blur-2xl lg:block"
         style={{
           background:
             "radial-gradient(ellipse at 30% 50%, oklch(0.72 0.1 85 / 0.1), transparent 70%)",
@@ -40,7 +40,7 @@ export function AboutImage({ inView }: Props) {
           alt={ABOUT.imageAlt}
           fill
           className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
-          sizes="(max-width: 1024px) 100vw, 42vw"
+          sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 42vw, 500px"
         />
         <div aria-hidden="true" className="absolute inset-0 bg-black/20" />
         <CornerFrame />

@@ -1,10 +1,11 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useRef } from "react"
 import type { AutoplayType } from "embla-carousel-autoplay"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { cn } from "@workspace/ui/lib/utils"
 import { useCarousel } from "@workspace/ui/components/carousel"
+import { useCarouselState } from "./use-carousel-state"
 
 type Props = {
   plugin: AutoplayType
@@ -13,21 +14,21 @@ type Props = {
 
 export function ReviewsNavigation({ plugin, resumeDelay }: Props) {
   const { api } = useCarousel()
-  const [current, setCurrent] = useState(0)
-  const [total, setTotal] = useState(0)
+  const { current, total } = useCarouselState(api)
+  const resumeTimer = useRef<ReturnType<typeof setTimeout>>(null)
 
   useEffect(() => {
-    if (!api) return
-    setTotal(api.scrollSnapList().length)
-    setCurrent(api.selectedScrollSnap())
-    api.on("select", () => setCurrent(api.selectedScrollSnap()))
-  }, [api])
+    return () => {
+      if (resumeTimer.current) clearTimeout(resumeTimer.current)
+    }
+  }, [])
 
   const handleNav = useCallback(
     (action: () => void) => {
       action()
       plugin.stop()
-      setTimeout(() => plugin.play(), resumeDelay)
+      if (resumeTimer.current) clearTimeout(resumeTimer.current)
+      resumeTimer.current = setTimeout(() => plugin.play(), resumeDelay)
     },
     [plugin, resumeDelay]
   )
@@ -67,11 +68,11 @@ export function ReviewsNavigation({ plugin, resumeDelay }: Props) {
             aria-selected={i === current}
             aria-label={`Opinia ${i + 1} z ${total}`}
             onClick={() => goTo(i)}
-            className="flex h-6 items-center"
+            className="flex h-11 w-11 items-center justify-center"
           >
             <span
               className={cn(
-                "block h-px rounded-full transition-all duration-500",
+                "block h-1 rounded-full transition-all duration-500",
                 i === current
                   ? "w-8 bg-gold/60"
                   : "w-2 bg-white/20 hover:bg-white/40"

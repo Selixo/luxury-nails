@@ -11,11 +11,11 @@ export default function Page() {
     <>
       <Hero />
       <main id="main-content">
-        <Experience />
         <Gallery />
+        <About />
+        <Experience />
         <Reviews />
         <Pricing />
-        <About />
         <Location />
       </main>
     </>

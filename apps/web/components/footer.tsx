@@ -24,7 +24,7 @@ export function Footer() {
           {/* Col 1 — Brand */}
           <div className="flex flex-col gap-6">
             <Logo />
-            <p className="max-w-xs text-sm leading-relaxed font-light text-white/40">
+            <p className="max-w-xs text-sm leading-relaxed font-light text-white/60">
               {SALON.description}
             </p>
 
@@ -38,7 +38,7 @@ export function Footer() {
                       aria-label={label}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex h-9 w-9 items-center justify-center border border-white/8 text-white/30 transition-colors duration-300 outline-none hover:border-gold/30 hover:text-gold focus-visible:border-gold/50 focus-visible:text-gold"
+                      className="flex h-9 w-9 items-center justify-center border border-white/8 text-white/55 transition-colors duration-300 outline-none hover:border-gold/30 hover:text-gold focus-visible:border-gold/50 focus-visible:text-gold"
                     >
                       <Icon width={16} height={16} aria-hidden="true" />
                     </Link>
@@ -59,7 +59,7 @@ export function Footer() {
                   <li key={label}>
                     <Link
                       href={`/${href}`}
-                      className="text-sm font-light text-white/40 transition-colors duration-300 outline-none hover:text-white/80 focus-visible:text-gold"
+                      className="text-sm font-light text-white/60 transition-colors duration-300 outline-none hover:text-white/85 focus-visible:text-gold"
                     >
                       {label}
                     </Link>
@@ -68,7 +68,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/rezerwacja"
-                    className="text-sm font-light text-gold/60 transition-colors duration-300 outline-none hover:text-gold focus-visible:text-gold"
+                    className="text-sm font-light text-gold/80 transition-colors duration-300 outline-none hover:text-gold focus-visible:text-gold"
                   >
                     Zarezerwuj wizytę
                   </Link>
@@ -86,7 +86,7 @@ export function Footer() {
       />
       <div className="mx-auto max-w-6xl px-6 py-6 md:px-12 lg:px-20">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs font-light text-white/20">
+          <p className="text-xs font-light text-white/55">
             © {year} {SALON.name}. Wszelkie prawa zastrzeżone.
           </p>
           <nav aria-label="Dokumenty prawne">
@@ -94,7 +94,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/polityka-prywatnosci"
-                  className="text-xs font-light text-white/25 transition-colors duration-300 outline-none hover:text-white/50 focus-visible:text-gold"
+                  className="text-xs font-light text-white/55 transition-colors duration-300 outline-none hover:text-white/80 focus-visible:text-gold"
                 >
                   Polityka prywatności
                 </Link>
@@ -103,7 +103,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/regulamin"
-                  className="text-xs font-light text-white/25 transition-colors duration-300 outline-none hover:text-white/50 focus-visible:text-gold"
+                  className="text-xs font-light text-white/55 transition-colors duration-300 outline-none hover:text-white/80 focus-visible:text-gold"
                 >
                   Regulamin
                 </Link>

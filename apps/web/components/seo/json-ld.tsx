@@ -1,4 +1,5 @@
 import { SALON } from "@/config/salon"
+import { REVIEWS } from "@/features/home/config/home.constants"
 
 export function JsonLd() {
   const schema = {
@@ -44,6 +45,26 @@ export function JsonLd() {
         },
       })),
     },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: (
+        REVIEWS.reduce((sum, r) => sum + r.rating, 0) / REVIEWS.length
+      ).toFixed(1),
+      reviewCount: REVIEWS.length,
+      bestRating: "5",
+      worstRating: "1",
+    },
+    review: REVIEWS.map((r) => ({
+      "@type": "Review",
+      author: { "@type": "Person", name: r.author },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: r.rating,
+        bestRating: "5",
+        worstRating: "1",
+      },
+      reviewBody: r.text,
+    })),
     sameAs: Object.values(SALON.socials),
   }
 

@@ -69,8 +69,8 @@ export function ExperienceContent({ item, isReversed, inView }: Props) {
 
         <div
           aria-hidden="true"
-          className="mb-3 h-px bg-gold/30 transition-[width] delay-500 duration-[800ms] ease-out motion-reduce:transition-none lg:mb-6"
-          style={{ width: inView ? "2.5rem" : "0" }}
+          className="mb-3 h-px w-10 origin-left bg-gold/30 transition-transform delay-500 duration-[800ms] ease-out motion-reduce:transition-none lg:mb-6"
+          style={{ transform: inView ? "scaleX(1)" : "scaleX(0)" }}
         />
 
         <p className="text-sm leading-loose font-light text-white/55 lg:max-w-sm">

@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react"
 import { useInView } from "@/hooks/useInView"
-import { ABOUT, ABOUT_STATS, CERTIFICATES } from "./config/home.constants"
+import { ABOUT_STATS, CERTIFICATES } from "./config/home.constants"
 import { AboutImage } from "./components/about/about-image"
 import { AboutContent } from "./components/about/about-content"
 import { AboutStats } from "./components/about/about-stats"
@@ -31,7 +31,7 @@ export function About() {
   return (
     <>
       <section
-        id="o-mnie"
+        id="about"
         ref={ref}
         className="relative scroll-mt-20 bg-background-alt px-6 py-24 md:px-12 md:py-28 lg:px-20 lg:py-32"
       >

@@ -3,12 +3,12 @@ import Facebook from "@/public/icons/facebook.svg"
 import TikTok from "@/public/icons/tiktok.svg"
 
 export const NAV_LINKS = [
-  { label: "Doświadczenie", href: "#doswiadczenie" },
-  { label: "Galeria", href: "#galeria" },
-  { label: "Cennik", href: "#cennik" },
-  { label: "Opinie", href: "#opinie" },
-  { label: "O mnie", href: "#o-mnie" },
-  { label: "Lokalizacja", href: "#lokalizacja" },
+  { label: "Galeria", href: "#gallery" },
+  { label: "O mnie", href: "#about" },
+  { label: "Doświadczenie", href: "#experience" },
+  { label: "Opinie", href: "#reviews" },
+  { label: "Cennik", href: "#pricing" },
+  { label: "Lokalizacja", href: "#location" },
 ]
 
 export const STATS = [
@@ -41,7 +41,7 @@ export const EXPERIENCE_ITEMS: ExperienceItem[] = [
     description:
       "Wybierz idealny termin w kilka sekund. Bez telefonów, bez kolejek — wszystko pod kontrolą w Twojej dłoni.",
     features: ["Wybór terminu", "Potwierdzenie SMS", "Bez kolejek"],
-    image: "/experiences/nails-booking.png",
+    image: "/experiences/nails-booking.jpg",
     imageAlt: "Eleganckie paznokcie — rezerwacja online w Luxury Nails",
   },
   {
@@ -53,7 +53,7 @@ export const EXPERIENCE_ITEMS: ExperienceItem[] = [
     description:
       "Każda klientka jest wyjątkowa. Słuchamy, doradzamy i tworzymy look dopasowany idealnie do Ciebie i Twojej osobowości.",
     features: ["Konsultacja stylu", "Dobór kolorów", "Twój look"],
-    image: "/experiences/nails-consultation.png",
+    image: "/experiences/nails-consultation.jpg",
     imageAlt: "Personalizowany manicure — indywidualne podejście Luxury Nails",
   },
   {
@@ -65,7 +65,7 @@ export const EXPERIENCE_ITEMS: ExperienceItem[] = [
     description:
       "Pracuję wyłącznie na produktach renomowanych marek. Twoje paznokcie są w dobrych rękach — od preparacji po ostatni detal.",
     features: ["Marki premium", "Trwały efekt", "Bezpieczne składniki"],
-    image: "/experiences/nails-vip.png",
+    image: "/experiences/nails-vip.jpg",
     imageAlt:
       "Produkty premium używane w Luxury Nails — jakość i bezpieczeństwo",
   },
@@ -78,7 +78,7 @@ export const EXPERIENCE_ITEMS: ExperienceItem[] = [
     description:
       "Przeglądaj poprzednie stylizacje, odtwarzaj ulubione wzory i śledź swoją ewolucję piękna.",
     features: ["Poprzednie stylizacje", "Ulubione wzory", "Twoja ewolucja"],
-    image: "/experiences/nails-history.png",
+    image: "/experiences/nails-history.jpg",
     imageAlt: "Historia wizyt — przeglądaj swoje stylizacje w Luxury Nails",
   },
 ]
@@ -306,12 +306,12 @@ export const CERTIFICATES: CertificateItem[] = [
 ]
 
 export const ABOUT = {
-  ownerName: "Imię Nazwisko",
+  ownerName: "Martyna Rydlicka",
   headline: "Pasja, która stała się rzemiosłem",
   lead: "Paznokcie to dla mnie nie tylko praca — to forma wyrazu, w której każdy detal ma znaczenie. Od lat tworzę stylizacje, które łączą precyzję z estetyką i są skrojone dokładnie pod potrzeby każdej klientki.",
   body: "Pracuję wyłącznie na sprawdzonych materiałach renomowanych marek i stale poszerzam swoje umiejętności na certyfikowanych szkoleniach. Każda wizyta to dla mnie nie tylko usługa — to chwila, w której Ty jesteś w centrum uwagi.",
-  image: "/me.png",
-  imageAlt: "Właścicielka Luxury Nails przy pracy",
+  image: "/me.jpg",
+  imageAlt: "Właścicielka Luxury Nails",
 }
 
 export const ABOUT_STATS: AboutStat[] = [
