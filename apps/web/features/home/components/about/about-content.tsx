@@ -23,8 +23,8 @@ export function AboutContent({ inView }: Props) {
 
       <div
         aria-hidden="true"
-        className="mb-6 h-px bg-gold/30 transition-[width] delay-500 duration-[800ms] ease-out motion-reduce:transition-none"
-        style={{ width: inView ? "2.5rem" : "0" }}
+        className="mb-6 h-px w-10 origin-left bg-gold/30 transition-transform delay-500 duration-[800ms] ease-out motion-reduce:transition-none"
+        style={{ transform: inView ? "scaleX(1)" : "scaleX(0)" }}
       />
 
       <p className="mb-4 text-sm leading-loose font-light text-white/60">
@@ -34,7 +34,7 @@ export function AboutContent({ inView }: Props) {
         {ABOUT.body}
       </p>
 
-      <p className="mt-8 font-display text-2xl font-light text-white/25 italic sm:text-3xl">
+      <p className="mt-8 font-display text-2xl font-light text-white/40 italic sm:text-3xl">
         {ABOUT.ownerName}
       </p>
     </div>

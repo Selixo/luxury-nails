@@ -34,7 +34,11 @@ export function GalleryClient() {
 
   return (
     <>
-      <GalleryFilters active={activeFilter} onChange={setActiveFilter} />
+      <GalleryFilters
+        active={activeFilter}
+        gridId={panelId}
+        onChange={setActiveFilter}
+      />
 
       <div
         id={panelId}

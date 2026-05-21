@@ -40,7 +40,7 @@ export function CookieConsent() {
         style={{ background: GOLD_GRADIENT }}
       />
 
-      <div className="bg-[#050507]/95 backdrop-blur-xl">
+      <div className="bg-background-alt/95 backdrop-blur-xl">
         {expanded && (
           <CookieSettings
             prefs={prefs}

@@ -3,25 +3,8 @@
 import Link from "next/link"
 import { Clock, MapPin, Navigation, Phone } from "lucide-react"
 import { useInView } from "@/hooks/useInView"
+import { formatDays } from "@/lib/days"
 import type { SALON } from "@/config/salon"
-
-const DAYS_PL: Record<string, string> = {
-  Monday: "Pon",
-  Tuesday: "Wt",
-  Wednesday: "Śr",
-  Thursday: "Czw",
-  Friday: "Pt",
-  Saturday: "Sob",
-  Sunday: "Niedz",
-}
-
-function formatDays(days: readonly string[]): string {
-  const first = days[0]
-  const last = days[days.length - 1]
-  if (!first || !last) return ""
-  if (days.length === 1) return DAYS_PL[first] ?? first
-  return `${DAYS_PL[first] ?? first} – ${DAYS_PL[last] ?? last}`
-}
 
 type Props = {
   salon: typeof SALON
@@ -85,7 +68,7 @@ export function LocationInfo({ salon, mapsUrl }: Props) {
                   key={slot.days[0]}
                   className="flex gap-4 text-sm font-light text-white/65"
                 >
-                  <span className="w-16 shrink-0 text-white/40">
+                  <span className="w-16 shrink-0 text-white/55">
                     {formatDays(slot.days)}
                   </span>
                   <span>
@@ -94,8 +77,8 @@ export function LocationInfo({ salon, mapsUrl }: Props) {
                 </li>
               ))}
               <li className="flex gap-4 text-sm font-light">
-                <span className="w-16 shrink-0 text-white/40">Niedz</span>
-                <span className="text-white/30">Zamknięte</span>
+                <span className="w-16 shrink-0 text-white/55">Niedz</span>
+                <span className="text-white/50">Zamknięte</span>
               </li>
             </ul>
           </li>
@@ -122,7 +105,7 @@ export function LocationInfo({ salon, mapsUrl }: Props) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Otwórz nawigację w Google Maps"
-        className="group flex w-fit items-center gap-3 border border-gold/25 px-6 py-3 text-[11px] tracking-[0.25em] text-gold/60 uppercase transition-colors duration-300 hover:border-gold/50 hover:text-gold"
+        className="group flex w-fit items-center gap-3 border border-gold/35 px-6 py-3 text-[11px] tracking-[0.25em] text-gold/80 uppercase transition-colors duration-300 hover:border-gold/60 hover:text-gold"
       >
         <Navigation
           size={12}

@@ -21,7 +21,7 @@ export function LocationHeader() {
         <h2 className="max-w-xl font-display text-3xl font-light tracking-wide text-white sm:text-4xl md:text-5xl lg:text-6xl">
           Odwiedź nas
         </h2>
-        <p className="text-sm leading-relaxed font-light text-white/50 md:max-w-xs">
+        <p className="text-sm leading-relaxed font-light text-white/60 md:max-w-xs">
           Znajdziesz nas w Klenicy. Kliknij w przycisk nawigacji, aby zobaczyć
           trasę dojazdu.
         </p>

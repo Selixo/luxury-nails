@@ -30,7 +30,7 @@ export function ExperienceImage({ item, isReversed, inView }: Props) {
     <div className={cn("relative", isReversed && "lg:order-last")}>
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -inset-8 hidden rounded-full opacity-40 blur-3xl lg:block"
+        className="pointer-events-none absolute -inset-8 hidden rounded-full opacity-30 blur-2xl lg:block"
         style={{
           background: `radial-gradient(ellipse at ${isReversed ? "70%" : "30%"} 50%, oklch(0.72 0.1 85 / 0.1), transparent 70%)`,
         }}
@@ -53,7 +53,7 @@ export function ExperienceImage({ item, isReversed, inView }: Props) {
 
         <div
           aria-hidden="true"
-          className="absolute right-5 bottom-5 z-10 border border-gold/30 bg-zinc-900/95 px-4 py-3 text-center backdrop-blur-sm transition-[opacity] delay-300 duration-[900ms] ease-out motion-reduce:transition-none lg:hidden"
+          className="absolute right-5 bottom-5 z-10 border border-gold/30 bg-zinc-900/95 px-4 py-3 text-center transition-[opacity] delay-300 duration-[900ms] ease-out motion-reduce:transition-none lg:hidden"
           style={{ opacity: inView ? 1 : 0 }}
         >
           <ItemBadge {...item.badge} size="sm" />
@@ -63,7 +63,7 @@ export function ExperienceImage({ item, isReversed, inView }: Props) {
       <div
         aria-hidden="true"
         className={cn(
-          "absolute top-10 z-10 hidden border border-gold/25 bg-zinc-900/95 px-5 py-4 text-center backdrop-blur-sm transition-[opacity,transform] delay-300 duration-[900ms] ease-out motion-reduce:transition-none lg:block",
+          "absolute top-10 z-10 hidden border border-gold/25 bg-zinc-900/95 px-5 py-4 text-center transition-[opacity,transform] delay-300 duration-[900ms] ease-out motion-reduce:transition-none lg:block",
           badgePosition
         )}
         style={{

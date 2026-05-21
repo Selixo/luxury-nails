@@ -9,6 +9,7 @@ type Props = {
 function StarRating({ rating }: { rating: number }) {
   return (
     <div
+      role="img"
       className="flex items-center gap-1"
       aria-label={`Ocena: ${rating} na 5`}
     >
@@ -73,7 +74,7 @@ export function ReviewCard({ review }: Props) {
         <ReviewAvatar author={review.author} avatar={review.avatar} />
         <div>
           <p className="text-sm font-light text-white/80">{review.author}</p>
-          <p className="mt-0.5 text-[11px] font-light tracking-wide text-white/35">
+          <p className="mt-0.5 text-[11px] font-light tracking-wide text-white/55">
             {review.service} · {review.date}
           </p>
         </div>

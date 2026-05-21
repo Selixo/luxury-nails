@@ -19,7 +19,7 @@ export function PricingNote() {
       <div aria-hidden="true" className="mb-10 h-px w-full bg-white/5" />
 
       <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
-        <p className="max-w-lg text-sm leading-relaxed font-light text-white/35">
+        <p className="max-w-lg text-sm leading-relaxed font-light text-white/55">
           Podane ceny są cenami wyjściowymi. Ostateczna wycena ustalana jest
           indywidualnie i zależy od stanu płytki, długości paznokci oraz
           złożoności wybranego zdobienia.

@@ -8,7 +8,7 @@ const MAPS_URL = `https://www.google.com/maps/dir/?api=1&destination=${SALON.geo
 export function Location() {
   return (
     <section
-      id="lokalizacja"
+      id="location"
       aria-labelledby="location-heading"
       className="scroll-mt-20 bg-background-alt px-6 py-12 md:px-12 md:py-20 lg:px-20 lg:py-28"
     >

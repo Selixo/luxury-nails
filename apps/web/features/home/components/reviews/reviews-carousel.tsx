@@ -1,7 +1,8 @@
 "use client"
 
 import Autoplay from "embla-carousel-autoplay"
-import { useRef } from "react"
+import { useRef, useState } from "react"
+import type { EmblaCarouselType } from "embla-carousel"
 import {
   Carousel,
   CarouselContent,
@@ -10,9 +11,9 @@ import {
 import type { Review } from "../../config/home.constants"
 import { ReviewCard } from "./review-card"
 import { ReviewsNavigation } from "./reviews-navigation"
+import { useCarouselState } from "./use-carousel-state"
 
 const AUTOPLAY_DELAY = 5000
-const STOP_ON_INTERACTION = true
 const RESUME_DELAY = 8000
 
 type Props = {
@@ -23,21 +24,28 @@ export function ReviewsCarousel({ reviews }: Props) {
   const plugin = useRef(
     Autoplay({
       delay: AUTOPLAY_DELAY,
-      stopOnInteraction: STOP_ON_INTERACTION,
+      stopOnInteraction: true,
       stopOnMouseEnter: false,
     })
   )
+  const [api, setApi] = useState<EmblaCarouselType>()
+  const { current } = useCarouselState(api)
 
   return (
     <Carousel
+      setApi={setApi}
       opts={{ loop: true }}
       plugins={[plugin.current]}
       onMouseLeave={() => plugin.current.play()}
       className="w-full"
     >
       <CarouselContent>
-        {reviews.map((review) => (
-          <CarouselItem key={review.author} className="py-2">
+        {reviews.map((review, i) => (
+          <CarouselItem
+            key={review.author}
+            className="py-2"
+            aria-hidden={i !== current}
+          >
             <ReviewCard review={review} />
           </CarouselItem>
         ))}
