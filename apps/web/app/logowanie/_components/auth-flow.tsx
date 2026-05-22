@@ -1,18 +1,17 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { StepPhone } from "./step-phone"
 import { StepPassword } from "./step-password"
-import { StepPin } from "./step-pin"
+import { StepVerify } from "./step-verify"
 import { StepRegister } from "./step-register"
-import { StepBooking } from "./step-booking"
 
 type Step =
   | { id: "phone" }
   | { id: "password"; phone: string }
-  | { id: "pin"; phone: string }
+  | { id: "verify"; phone: string }
   | { id: "register" }
-  | { id: "booking"; name: string }
 
 function CornerFrame() {
   return (
@@ -25,8 +24,9 @@ function CornerFrame() {
   )
 }
 
-export function ReservationFlow() {
+export function AuthFlow() {
   const [step, setStep] = useState<Step>({ id: "phone" })
+  const router = useRouter()
 
   function renderStep() {
     switch (step.id) {
@@ -34,39 +34,32 @@ export function ReservationFlow() {
         return (
           <StepPhone
             onExistingUser={(phone) => setStep({ id: "password", phone })}
-            onNewUser={(phone) => setStep({ id: "pin", phone })}
+            onNewUser={(phone) => setStep({ id: "verify", phone })}
           />
         )
       case "password":
         return (
           <StepPassword
             phone={step.phone}
-            onSuccess={(name) => setStep({ id: "booking", name })}
+            onSuccess={() => router.push("/panel/klient")}
             onBack={() => setStep({ id: "phone" })}
           />
         )
-      case "pin":
+      case "verify":
         return (
-          <StepPin
+          <StepVerify
             phone={step.phone}
             onVerified={() => setStep({ id: "register" })}
             onBack={() => setStep({ id: "phone" })}
           />
         )
       case "register":
-        return (
-          <StepRegister
-            onSuccess={(name) => setStep({ id: "booking", name })}
-          />
-        )
-      case "booking":
-        return <StepBooking name={step.name} />
+        return <StepRegister onSuccess={() => router.push("/panel/klient")} />
     }
   }
 
   return (
     <div className="relative border border-white/8 bg-white/[0.02] px-8 py-10 sm:px-12 sm:py-12">
-      {/* Ambient glow */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-10 -left-10 h-48 w-48 rounded-full opacity-20 blur-3xl"

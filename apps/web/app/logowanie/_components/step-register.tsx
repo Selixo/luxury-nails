@@ -5,7 +5,7 @@ import { Button } from "@workspace/ui/components/button"
 import { ArrowRight, Eye, EyeOff } from "lucide-react"
 
 type Props = {
-  onSuccess: (name: string) => void
+  onSuccess: () => void
 }
 
 export function StepRegister({ onSuccess }: Props) {
@@ -33,7 +33,7 @@ export function StepRegister({ onSuccess }: Props) {
     }
     // UI-only placeholder
     // W przyszłości: POST /api/auth/register
-    onSuccess(name.trim())
+    onSuccess()
   }
 
   return (

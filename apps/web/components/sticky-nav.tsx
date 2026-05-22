@@ -64,7 +64,7 @@ export function StickyNav() {
               variant="gold-fill"
               className="hidden lg:inline-flex"
             >
-              <Link href="#rezerwacja">Umów wizytę</Link>
+              <Link href="/logowanie">Umów wizytę</Link>
             </Button>
 
             <Hamburger open={menuOpen} onClick={() => setMenuOpen(true)} />

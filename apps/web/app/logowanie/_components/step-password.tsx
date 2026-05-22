@@ -6,7 +6,7 @@ import { ArrowRight, Eye, EyeOff } from "lucide-react"
 
 type Props = {
   phone: string
-  onSuccess: (name: string) => void
+  onSuccess: () => void
   onBack: () => void
 }
 
@@ -25,7 +25,7 @@ export function StepPassword({ phone, onSuccess, onBack }: Props) {
     }
     // UI-only placeholder
     // W przyszłości: POST /api/auth/login
-    onSuccess("Klientka") // backend zwróci imię
+    onSuccess()
   }
 
   return (

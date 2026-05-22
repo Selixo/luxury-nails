@@ -1,6 +1,6 @@
 import { Providers } from "@/components/providers"
 
-export default function RezerwacjaLayout({
+export default function PanelLayout({
   children,
 }: {
   children: React.ReactNode

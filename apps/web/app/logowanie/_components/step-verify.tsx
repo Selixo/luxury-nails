@@ -14,7 +14,7 @@ type Props = {
   onBack: () => void
 }
 
-export function StepPin({ phone, onVerified, onBack }: Props) {
+export function StepVerify({ phone, onVerified, onBack }: Props) {
   const [pin, setPin] = useState<string[]>(Array(PIN_LENGTH).fill(""))
   const [error, setError] = useState("")
   const [cooldown, setCooldown] = useState(RESEND_COOLDOWN)

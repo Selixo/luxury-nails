@@ -1,23 +1,9 @@
 import type { Metadata } from "next"
-import dynamic from "next/dynamic"
 import { Cormorant_Garamond, Geist } from "next/font/google"
 
 import "@workspace/ui/globals.css"
 import { SALON } from "@/config/salon"
-import { JsonLd } from "@/components/seo/json-ld"
-import { SkipToContent } from "@/components/ui/skip-to-content"
-import { Footer } from "@/components/footer"
-import { SocialSidebar } from "@/components/social-sidebar"
-import { StickyNav } from "@/components/sticky-nav"
 import { cn } from "@workspace/ui/lib/utils"
-
-const CookieConsent = dynamic(() =>
-  import("@/components/cookie-consent").then((m) => m.CookieConsent)
-)
-
-const GoogleAnalytics = dynamic(() =>
-  import("@/components/google-analytics").then((m) => m.GoogleAnalytics)
-)
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -111,19 +97,7 @@ export default function RootLayout({
         cormorant.variable
       )}
     >
-      <body>
-        <JsonLd />
-        <SkipToContent />
-
-        <StickyNav />
-
-        {children}
-
-        <GoogleAnalytics />
-        <Footer />
-        <CookieConsent />
-        <SocialSidebar />
-      </body>
+      <body>{children}</body>
     </html>
   )
 }

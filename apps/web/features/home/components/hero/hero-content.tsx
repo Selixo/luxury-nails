@@ -53,7 +53,7 @@ export function HeroContent() {
           variant="gold-fill"
           className="border-gold/70 px-8 py-3.5 tracking-widest uppercase md:px-10 md:py-4"
         >
-          <Link href="/rezerwacja">Zarezerwuj wizytę</Link>
+          <Link href="/logowanie">Zarezerwuj wizytę</Link>
         </Button>
       </div>
     </div>

@@ -53,7 +53,6 @@ export default function Regulamin() {
   return (
     <div className="min-h-screen bg-[#09090b] px-6 pt-32 pb-24 md:px-12 lg:px-20">
       <div className="mx-auto max-w-2xl">
-        {/* Header */}
         <div className="mb-14">
           <p className="mb-3 text-xs font-light tracking-[0.3em] text-gold uppercase">
             Dokument prawny
@@ -64,7 +63,6 @@ export default function Regulamin() {
           <div aria-hidden="true" className="mt-6 h-px w-full bg-white/5" />
         </div>
 
-        {/* Sections */}
         <div className="flex flex-col gap-10">
           {sections.map((section, i) => (
             <section key={section.title}>
@@ -78,7 +76,6 @@ export default function Regulamin() {
           ))}
         </div>
 
-        {/* Back link */}
         <div aria-hidden="true" className="mt-14 h-px w-full bg-white/5" />
         <div className="mt-8">
           <Link
