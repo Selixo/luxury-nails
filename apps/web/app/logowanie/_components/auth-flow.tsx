@@ -11,7 +11,7 @@ type Step =
   | { id: "phone" }
   | { id: "password"; phone: string }
   | { id: "verify"; phone: string }
-  | { id: "register" }
+  | { id: "register"; phone: string }
 
 function CornerFrame() {
   return (
@@ -49,12 +49,17 @@ export function AuthFlow() {
         return (
           <StepVerify
             phone={step.phone}
-            onVerified={() => setStep({ id: "register" })}
+            onVerified={() => setStep({ id: "register", phone: step.phone })}
             onBack={() => setStep({ id: "phone" })}
           />
         )
       case "register":
-        return <StepRegister onSuccess={() => router.push("/panel/klient")} />
+        return (
+          <StepRegister
+            phone={step.phone}
+            onSuccess={() => router.push("/panel/klient")}
+          />
+        )
     }
   }
 

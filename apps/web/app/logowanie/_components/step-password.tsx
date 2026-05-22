@@ -1,8 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useTransition } from "react"
 import { Button } from "@workspace/ui/components/button"
 import { ArrowRight, Eye, EyeOff } from "lucide-react"
+import { signInWithPassword } from "../actions"
 
 type Props = {
   phone: string
@@ -14,6 +15,7 @@ export function StepPassword({ phone, onSuccess, onBack }: Props) {
   const [password, setPassword] = useState("")
   const [visible, setVisible] = useState(false)
   const [error, setError] = useState("")
+  const [isPending, startTransition] = useTransition()
 
   const masked = `+48 ${phone.slice(0, 3)} ${phone.slice(3, 6)} ${phone.slice(6)}`
 
@@ -23,9 +25,14 @@ export function StepPassword({ phone, onSuccess, onBack }: Props) {
       setError("Wpisz hasło.")
       return
     }
-    // UI-only placeholder
-    // W przyszłości: POST /api/auth/login
-    onSuccess()
+    startTransition(async () => {
+      const { error: err } = await signInWithPassword(phone, password)
+      if (err) {
+        setError(err)
+        return
+      }
+      onSuccess()
+    })
   }
 
   return (
@@ -85,10 +92,13 @@ export function StepPassword({ phone, onSuccess, onBack }: Props) {
 
       <Button
         type="submit"
+        disabled={isPending}
         variant="gold-fill"
-        className="mb-5 w-full justify-between border-gold/50 px-6 py-4 tracking-widest uppercase"
+        className="mb-5 w-full justify-between border-gold/50 px-6 py-4 tracking-widest uppercase disabled:opacity-60"
       >
-        <span className="relative z-10">Zaloguj się</span>
+        <span className="relative z-10">
+          {isPending ? "Loguję..." : "Zaloguj się"}
+        </span>
         <ArrowRight size={14} aria-hidden="true" className="relative z-10" />
       </Button>
 

@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Logo } from "@/components/ui/logo"
+import { SignOutButton } from "@/components/ui/sign-out-button"
 import { cn } from "@workspace/ui/lib/utils"
 
 const NAV = [
@@ -81,12 +82,7 @@ export default function AdminLayout({
             })}
           </nav>
 
-          <Link
-            href="/logowanie"
-            className="text-xs font-light tracking-[0.15em] text-white/25 uppercase transition-colors outline-none hover:text-white/50 focus-visible:text-gold"
-          >
-            Wyloguj
-          </Link>
+          <SignOutButton className="text-xs font-light tracking-[0.15em] text-white/25 uppercase transition-colors outline-none hover:text-white/50 focus-visible:text-gold" />
         </div>
 
         {/* Mobile nav */}

@@ -1,8 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useTransition } from "react"
 import { Button } from "@workspace/ui/components/button"
 import { ArrowRight } from "lucide-react"
+import { checkPhoneExists, sendOtp } from "../actions"
 
 type Props = {
   onExistingUser: (phone: string) => void
@@ -12,6 +13,7 @@ type Props = {
 export function StepPhone({ onExistingUser, onNewUser }: Props) {
   const [phone, setPhone] = useState("")
   const [error, setError] = useState("")
+  const [isPending, startTransition] = useTransition()
 
   const normalized = phone.replace(/\s/g, "")
   const isValid = /^\d{9}$/.test(normalized)
@@ -22,14 +24,21 @@ export function StepPhone({ onExistingUser, onNewUser }: Props) {
       setError("Podaj poprawny 9-cyfrowy numer telefonu.")
       return
     }
-    // UI-only: symulacja sprawdzenia numeru
-    // W przyszłości: POST /api/auth/check-phone
-    const exists = false // placeholder — backend zadecyduje
-    if (exists) {
-      onExistingUser(normalized)
-    } else {
-      onNewUser(normalized)
-    }
+
+    startTransition(async () => {
+      const exists = await checkPhoneExists(normalized)
+
+      if (exists) {
+        onExistingUser(normalized)
+      } else {
+        const { error: otpError } = await sendOtp(normalized)
+        if (otpError) {
+          setError("Nie udało się wysłać kodu. Spróbuj ponownie.")
+          return
+        }
+        onNewUser(normalized)
+      }
+    })
   }
 
   return (
@@ -84,10 +93,13 @@ export function StepPhone({ onExistingUser, onNewUser }: Props) {
 
       <Button
         type="submit"
+        disabled={isPending}
         variant="gold-fill"
-        className="w-full justify-between border-gold/50 px-6 py-4 tracking-widest uppercase"
+        className="w-full justify-between border-gold/50 px-6 py-4 tracking-widest uppercase disabled:opacity-60"
       >
-        <span className="relative z-10">Dalej</span>
+        <span className="relative z-10">
+          {isPending ? "Sprawdzam..." : "Dalej"}
+        </span>
         <ArrowRight size={14} aria-hidden="true" className="relative z-10" />
       </Button>
     </form>

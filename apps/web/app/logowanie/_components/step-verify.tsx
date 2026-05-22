@@ -1,12 +1,13 @@
 "use client"
 
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect, useTransition } from "react"
 import { Button } from "@workspace/ui/components/button"
 import { ArrowRight } from "lucide-react"
+import { createClient } from "@/lib/supabase/client"
+import { sendOtp } from "../actions"
 
 const PIN_LENGTH = 6
 const RESEND_COOLDOWN = 30
-const DEV_PIN = "123456" // tymczasowy PIN do testów UI — usuń gdy backend gotowy
 
 type Props = {
   phone: string
@@ -18,12 +19,12 @@ export function StepVerify({ phone, onVerified, onBack }: Props) {
   const [pin, setPin] = useState<string[]>(Array(PIN_LENGTH).fill(""))
   const [error, setError] = useState("")
   const [cooldown, setCooldown] = useState(RESEND_COOLDOWN)
+  const [isPending, startTransition] = useTransition()
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
 
   const masked = `+48 ${phone.slice(0, 3)} ${phone.slice(3, 6)} ${phone.slice(6)}`
   const filled = pin.every((d) => d !== "")
 
-  // Countdown for resend button
   useEffect(() => {
     if (cooldown <= 0) return
     const t = setTimeout(() => setCooldown((c) => c - 1), 1000)
@@ -52,37 +53,51 @@ export function StepVerify({ phone, onVerified, onBack }: Props) {
 
   function handlePaste(e: React.ClipboardEvent) {
     e.preventDefault()
-    const text = e.clipboardData.getData("text")
-    const digits = text.replace(/\D/g, "").slice(0, PIN_LENGTH).split("")
+    const digits = e.clipboardData
+      .getData("text")
+      .replace(/\D/g, "")
+      .slice(0, PIN_LENGTH)
+      .split("")
     const next = Array(PIN_LENGTH).fill("")
     digits.forEach((d, i) => {
       next[i] = d
     })
     setPin(next)
-    const focusIndex = Math.min(digits.length, PIN_LENGTH - 1)
-    inputRefs.current[focusIndex]?.focus()
+    inputRefs.current[Math.min(digits.length, PIN_LENGTH - 1)]?.focus()
   }
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (!filled) {
-      setError("Wpisz pełny 6-cyfrowy kod PIN.")
+      setError("Wpisz pełny 6-cyfrowy kod.")
       return
     }
-    if (pin.join("") !== DEV_PIN) {
-      setError(`Nieprawidłowy kod. (testowy PIN: ${DEV_PIN})`)
-      return
-    }
-    // W przyszłości: POST /api/auth/verify-pin
-    onVerified()
+    startTransition(async () => {
+      // Weryfikacja OTP przez browser client — sesja ląduje w cookies po stronie klienta
+      const supabase = createClient()
+      const { error: err } = await supabase.auth.verifyOtp({
+        phone: "+48" + phone,
+        token: pin.join(""),
+        type: "sms",
+      })
+      if (err) {
+        setError("Nieprawidłowy lub wygasły kod. Spróbuj ponownie.")
+        setPin(Array(PIN_LENGTH).fill(""))
+        inputRefs.current[0]?.focus()
+        return
+      }
+      onVerified()
+    })
   }
 
   function handleResend() {
     if (cooldown > 0) return
-    setPin(Array(PIN_LENGTH).fill(""))
-    setCooldown(RESEND_COOLDOWN)
-    inputRefs.current[0]?.focus()
-    // W przyszłości: POST /api/auth/send-pin
+    startTransition(async () => {
+      await sendOtp(phone)
+      setPin(Array(PIN_LENGTH).fill(""))
+      setCooldown(RESEND_COOLDOWN)
+      inputRefs.current[0]?.focus()
+    })
   }
 
   return (
@@ -100,12 +115,12 @@ export function StepVerify({ phone, onVerified, onBack }: Props) {
 
       <div className="mb-8">
         <label className="mb-4 block text-xs font-light tracking-[0.2em] text-white/40 uppercase">
-          Kod PIN
+          Kod SMS
         </label>
         <div
           className="flex gap-2 sm:gap-3"
           role="group"
-          aria-label="Wprowadź 6-cyfrowy kod PIN"
+          aria-label="Wprowadź 6-cyfrowy kod"
           onPaste={handlePaste}
         >
           {Array.from({ length: PIN_LENGTH }).map((_, i) => (
@@ -142,10 +157,12 @@ export function StepVerify({ phone, onVerified, onBack }: Props) {
       <Button
         type="submit"
         variant="gold-fill"
-        disabled={!filled}
+        disabled={!filled || isPending}
         className="mb-5 w-full justify-between border-gold/50 px-6 py-4 tracking-widest uppercase disabled:opacity-40"
       >
-        <span className="relative z-10">Weryfikuj kod</span>
+        <span className="relative z-10">
+          {isPending ? "Weryfikuję..." : "Weryfikuj kod"}
+        </span>
         <ArrowRight size={14} aria-hidden="true" className="relative z-10" />
       </Button>
 
@@ -160,7 +177,7 @@ export function StepVerify({ phone, onVerified, onBack }: Props) {
         <button
           type="button"
           onClick={handleResend}
-          disabled={cooldown > 0}
+          disabled={cooldown > 0 || isPending}
           aria-live="polite"
           className="text-xs font-light text-white/25 transition-colors outline-none hover:text-white/50 focus-visible:text-gold disabled:cursor-default disabled:opacity-50"
         >

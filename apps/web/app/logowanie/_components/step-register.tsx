@@ -1,19 +1,22 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useTransition } from "react"
 import { Button } from "@workspace/ui/components/button"
 import { ArrowRight, Eye, EyeOff } from "lucide-react"
+import { completeRegistration } from "../actions"
 
 type Props = {
+  phone: string
   onSuccess: () => void
 }
 
-export function StepRegister({ onSuccess }: Props) {
+export function StepRegister({ phone, onSuccess }: Props) {
   const [name, setName] = useState("")
   const [password, setPassword] = useState("")
   const [confirm, setConfirm] = useState("")
   const [visible, setVisible] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
+  const [isPending, startTransition] = useTransition()
 
   function validate() {
     const e: Record<string, string> = {}
@@ -31,9 +34,14 @@ export function StepRegister({ onSuccess }: Props) {
       setErrors(errs)
       return
     }
-    // UI-only placeholder
-    // W przyszłości: POST /api/auth/register
-    onSuccess()
+    startTransition(async () => {
+      const { error } = await completeRegistration(name.trim(), password)
+      if (error) {
+        setErrors({ submit: error })
+        return
+      }
+      onSuccess()
+    })
   }
 
   return (
@@ -65,7 +73,7 @@ export function StepRegister({ onSuccess }: Props) {
             value={name}
             onChange={(e) => {
               setName(e.target.value)
-              setErrors((prev) => ({ ...prev, name: "" }))
+              setErrors((p) => ({ ...p, name: "" }))
             }}
             placeholder="np. Anna"
             aria-describedby={errors.name ? "name-error" : undefined}
@@ -99,7 +107,7 @@ export function StepRegister({ onSuccess }: Props) {
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value)
-                setErrors((prev) => ({ ...prev, password: "" }))
+                setErrors((p) => ({ ...p, password: "" }))
               }}
               placeholder="Min. 8 znaków"
               aria-describedby={
@@ -143,7 +151,7 @@ export function StepRegister({ onSuccess }: Props) {
             value={confirm}
             onChange={(e) => {
               setConfirm(e.target.value)
-              setErrors((prev) => ({ ...prev, confirm: "" }))
+              setErrors((p) => ({ ...p, confirm: "" }))
             }}
             placeholder="••••••••"
             aria-describedby={errors.confirm ? "confirm-error" : undefined}
@@ -162,12 +170,21 @@ export function StepRegister({ onSuccess }: Props) {
         </div>
       </div>
 
+      {errors.submit && (
+        <p role="alert" className="mb-4 text-xs font-light text-red-400/80">
+          {errors.submit}
+        </p>
+      )}
+
       <Button
         type="submit"
+        disabled={isPending}
         variant="gold-fill"
-        className="mt-2 w-full justify-between border-gold/50 px-6 py-4 tracking-widest uppercase"
+        className="mt-2 w-full justify-between border-gold/50 px-6 py-4 tracking-widest uppercase disabled:opacity-60"
       >
-        <span className="relative z-10">Utwórz konto</span>
+        <span className="relative z-10">
+          {isPending ? "Tworzę konto..." : "Utwórz konto"}
+        </span>
         <ArrowRight size={14} aria-hidden="true" className="relative z-10" />
       </Button>
     </form>
