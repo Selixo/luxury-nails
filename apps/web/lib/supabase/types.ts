@@ -22,6 +22,8 @@ export type Database = {
           id: string
           note: string | null
           reason: string
+          unbanned_at: string | null
+          unbanned_by: string | null
         }
         Insert: {
           banned_at?: string
@@ -30,6 +32,8 @@ export type Database = {
           id?: string
           note?: string | null
           reason: string
+          unbanned_at?: string | null
+          unbanned_by?: string | null
         }
         Update: {
           banned_at?: string
@@ -38,6 +42,8 @@ export type Database = {
           id?: string
           note?: string | null
           reason?: string
+          unbanned_at?: string | null
+          unbanned_by?: string | null
         }
         Relationships: [
           {
@@ -50,7 +56,14 @@ export type Database = {
           {
             foreignKeyName: "bans_client_id_fkey"
             columns: ["client_id"]
-            isOneToOne: true
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bans_unbanned_by_fkey"
+            columns: ["unbanned_by"]
+            isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           },

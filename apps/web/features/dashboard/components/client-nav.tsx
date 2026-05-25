@@ -13,7 +13,7 @@ const NAV = [
   { href: "/dashboard/client/profil", label: "Profil", exact: false },
 ]
 
-export function KlientNav({ children }: { children: React.ReactNode }) {
+export function ClientNav({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
 
   return (
@@ -54,7 +54,6 @@ export function KlientNav({ children }: { children: React.ReactNode }) {
           <SignOutButton className="text-xs font-light tracking-[0.15em] text-white/25 uppercase transition-colors outline-none hover:text-white/50 focus-visible:text-gold" />
         </div>
 
-        {/* Mobile nav */}
         <nav
           className="flex items-center gap-5 overflow-x-auto px-6 pb-3 md:hidden"
           aria-label="Nawigacja mobilna"
