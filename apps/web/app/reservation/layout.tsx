@@ -1,6 +1,6 @@
 import { Providers } from "@/components/providers"
 
-export default function LogowanieLayout({
+export default function ReservationLayout({
   children,
 }: {
   children: React.ReactNode

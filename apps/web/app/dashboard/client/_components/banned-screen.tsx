@@ -18,7 +18,7 @@ export function BannedScreen({ reason, note, bannedAt }: Props) {
           href="/"
           className="text-xs font-light tracking-[0.2em] text-white/25 uppercase transition-colors outline-none hover:text-white/50 focus-visible:text-gold"
         >
-          ← Strona główna
+          <span aria-hidden="true">←</span> Strona główna
         </Link>
       </header>
 

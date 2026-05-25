@@ -3,53 +3,28 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Logo } from "@/components/ui/logo"
+import { SignOutButton } from "@/components/ui/sign-out-button"
 import { cn } from "@workspace/ui/lib/utils"
 
 const NAV = [
-  { href: "/panel/admin", label: "Przegląd", exact: true, badge: 0 },
-  { href: "/panel/admin/wizyty", label: "Wizyty", exact: false, badge: 2 },
-  { href: "/panel/admin/klientki", label: "Klientki", exact: false, badge: 0 },
-  {
-    href: "/panel/admin/kalendarz",
-    label: "Kalendarz",
-    exact: false,
-    badge: 0,
-  },
-  {
-    href: "/panel/admin/podsumowanie",
-    label: "Podsumowanie",
-    exact: false,
-    badge: 0,
-  },
-  {
-    href: "/panel/admin/ustawienia",
-    label: "Ustawienia",
-    exact: false,
-    badge: 0,
-  },
+  { href: "/dashboard/client", label: "Przegląd", exact: true },
+  { href: "/dashboard/client/rezerwacja", label: "Nowa wizyta", exact: false },
+  { href: "/dashboard/client/historia", label: "Historia", exact: false },
+  { href: "/dashboard/client/profil", label: "Profil", exact: false },
 ]
 
-export default function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export function KlientNav({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
 
   return (
     <div className="min-h-screen bg-[#09090b]">
       <header className="sticky top-0 z-40 border-b border-white/5 bg-[#09090b]/95 backdrop-blur-xl">
         <div className="flex items-center justify-between px-6 py-4 md:px-12">
-          <div className="flex items-center gap-4">
-            <Logo />
-            <span className="hidden rounded-sm border border-gold/25 px-2 py-0.5 text-[10px] tracking-[0.2em] text-gold/70 uppercase sm:block">
-              Admin
-            </span>
-          </div>
+          <Logo />
 
           <nav
             className="hidden items-center gap-7 md:flex"
-            aria-label="Panel admina"
+            aria-label="Panel klienta"
           >
             {NAV.map((link) => {
               const isActive = link.exact
@@ -65,11 +40,6 @@ export default function AdminLayout({
                   )}
                 >
                   {link.label}
-                  {link.badge > 0 && (
-                    <span className="ml-1.5 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-amber-400/20 px-1 text-[9px] font-light text-amber-400/90">
-                      {link.badge}
-                    </span>
-                  )}
                   {isActive && (
                     <span
                       aria-hidden="true"
@@ -81,12 +51,7 @@ export default function AdminLayout({
             })}
           </nav>
 
-          <Link
-            href="/logowanie"
-            className="text-xs font-light tracking-[0.15em] text-white/25 uppercase transition-colors outline-none hover:text-white/50 focus-visible:text-gold"
-          >
-            Wyloguj
-          </Link>
+          <SignOutButton className="text-xs font-light tracking-[0.15em] text-white/25 uppercase transition-colors outline-none hover:text-white/50 focus-visible:text-gold" />
         </div>
 
         {/* Mobile nav */}
