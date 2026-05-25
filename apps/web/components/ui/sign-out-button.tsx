@@ -2,7 +2,7 @@
 
 import { useTransition } from "react"
 import { useRouter } from "next/navigation"
-import { signOut } from "@/app/logowanie/actions"
+import { signOut } from "@/features/reservation/actions"
 
 type Props = {
   className?: string
@@ -15,8 +15,11 @@ export function SignOutButton({ className, children }: Props) {
 
   function handleSignOut() {
     startTransition(async () => {
-      await signOut()
-      router.push("/logowanie")
+      const { error } = await signOut()
+      if (error) {
+        console.error("signOut error:", error)
+      }
+      router.push("/reservation")
       router.refresh()
     })
   }

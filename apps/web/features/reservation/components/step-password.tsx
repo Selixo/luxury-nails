@@ -4,6 +4,7 @@ import { useState, useTransition } from "react"
 import { Button } from "@workspace/ui/components/button"
 import { ArrowRight, Eye, EyeOff } from "lucide-react"
 import { signInWithPassword } from "../actions"
+import { maskPhone } from "../lib/phone"
 
 type Props = {
   phone: string
@@ -17,7 +18,7 @@ export function StepPassword({ phone, onSuccess, onBack }: Props) {
   const [error, setError] = useState("")
   const [isPending, startTransition] = useTransition()
 
-  const masked = `+48 ${phone.slice(0, 3)} ${phone.slice(3, 6)} ${phone.slice(6)}`
+  const masked = maskPhone(phone)
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -76,7 +77,7 @@ export function StepPassword({ phone, onSuccess, onBack }: Props) {
             aria-label={visible ? "Ukryj hasło" : "Pokaż hasło"}
             className="shrink-0 text-white/25 transition-colors outline-none hover:text-white/50 focus-visible:text-gold"
           >
-            {visible ? <EyeOff size={14} /> : <Eye size={14} />}
+            {visible ? <Eye size={16} /> : <EyeOff size={16} />}
           </button>
         </div>
         {error && (
@@ -107,7 +108,7 @@ export function StepPassword({ phone, onSuccess, onBack }: Props) {
         onClick={onBack}
         className="text-xs font-light text-white/25 transition-colors outline-none hover:text-white/50 focus-visible:text-gold"
       >
-        ← Zmień numer telefonu
+        <span aria-hidden="true">←</span> Zmień numer telefonu
       </button>
     </form>
   )

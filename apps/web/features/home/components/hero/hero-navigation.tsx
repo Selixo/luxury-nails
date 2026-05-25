@@ -48,7 +48,7 @@ export const HeroNavigation = () => {
         </ul>
 
         <Button asChild variant="gold-fill" className="hidden lg:inline-flex">
-          <Link href="#rezerwacja">Umów wizytę</Link>
+          <Link href="/reservation">Umów wizytę</Link>
         </Button>
 
         <Hamburger open={menuOpen} onClick={() => setMenuOpen(true)} />

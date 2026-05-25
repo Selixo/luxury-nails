@@ -9,7 +9,7 @@ export const Logo = () => {
         height={36}
         src="/logo.svg"
         alt="Martyna Rydlicka Nails"
-        className="h-9 w-auto"
+        className="h-7 w-auto sm:h-9"
       />
     </Link>
   )

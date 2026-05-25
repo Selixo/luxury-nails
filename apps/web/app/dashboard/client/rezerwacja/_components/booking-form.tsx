@@ -116,6 +116,26 @@ const SERVICES: Service[] = [
 
 const CATEGORIES = [...new Set(SERVICES.map((s) => s.category))]
 
+// Exact hostname whitelist — no endsWith() to prevent subdomain takeover
+const ALLOWED_IMAGE_HOSTS = new Set([
+  "pinterest.com",
+  "www.pinterest.com",
+  "i.pinimg.com",
+  "instagram.com",
+  "www.instagram.com",
+  "cdninstagram.com",
+])
+
+function isAllowedImageUrl(url: string): boolean {
+  if (!url.trim()) return false
+  try {
+    const { protocol, hostname } = new URL(url)
+    return protocol === "https:" && ALLOWED_IMAGE_HOSTS.has(hostname)
+  } catch {
+    return false
+  }
+}
+
 function formatDate(iso: string): string {
   if (!iso) return ""
   return new Intl.DateTimeFormat("pl-PL", {
@@ -139,7 +159,8 @@ export function BookingForm() {
   const [imgError, setImgError] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
 
-  const hasValidImg = inspirationUrl.trim() !== "" && !imgError
+  const isUrlAllowed = isAllowedImageUrl(inspirationUrl)
+  const hasValidImg = isUrlAllowed && !imgError
 
   const today = new Date().toISOString().split("T")[0]
   const selectedService = SERVICES.find((s) => s.id === serviceId)
@@ -410,7 +431,11 @@ export function BookingForm() {
           />
           {inspirationUrl.trim() && (
             <div className="mt-4">
-              {imgError ? (
+              {!isUrlAllowed ? (
+                <p className="text-xs font-light text-white/30">
+                  Wklej link z Pinterest lub Instagrama, aby zobaczyć podgląd.
+                </p>
+              ) : imgError ? (
                 <p className="text-xs font-light text-red-400/50">
                   Nie można załadować podglądu — sprawdź czy link prowadzi
                   bezpośrednio do zdjęcia.
@@ -509,7 +534,7 @@ export function BookingForm() {
               )}
 
               {/* Inspiracja */}
-              {hasValidImg && (
+              {isUrlAllowed && !imgError && (
                 <>
                   <div aria-hidden="true" className="h-px bg-white/5" />
                   <div>

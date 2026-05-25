@@ -1,35 +1,20 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname, useSearchParams } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { Logo } from "@/components/ui/logo"
 import { SignOutButton } from "@/components/ui/sign-out-button"
 import { cn } from "@workspace/ui/lib/utils"
-import { BannedScreen } from "./_components/banned-screen"
 
 const NAV = [
-  { href: "/panel/klient", label: "Przegląd", exact: true },
-  { href: "/panel/klient/rezerwacja", label: "Nowa wizyta", exact: false },
-  { href: "/panel/klient/historia", label: "Historia", exact: false },
-  { href: "/panel/klient/profil", label: "Profil", exact: false },
+  { href: "/dashboard/client", label: "Przegląd", exact: true },
+  { href: "/dashboard/client/rezerwacja", label: "Nowa wizyta", exact: false },
+  { href: "/dashboard/client/historia", label: "Historia", exact: false },
+  { href: "/dashboard/client/profil", label: "Profil", exact: false },
 ]
 
-export default function KlientLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export function KlientNav({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
-  const searchParams = useSearchParams()
-
-  if (searchParams.get("demo-ban") === "1") {
-    return (
-      <BannedScreen
-        reason="Nieobecność bez zgłoszenia (3+)"
-        bannedAt="22 maja 2025"
-      />
-    )
-  }
 
   return (
     <div className="min-h-screen bg-[#09090b]">

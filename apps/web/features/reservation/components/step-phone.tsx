@@ -3,41 +3,35 @@
 import { useState, useTransition } from "react"
 import { Button } from "@workspace/ui/components/button"
 import { ArrowRight } from "lucide-react"
-import { checkPhoneExists, sendOtp } from "../actions"
+import { checkPhone } from "../actions"
+import { normalizePhone, formatPhone } from "../lib/phone"
 
 type Props = {
-  onExistingUser: (phone: string) => void
-  onNewUser: (phone: string) => void
+  onSent: (result: { phone: string; isExisting: boolean }) => void
 }
 
-export function StepPhone({ onExistingUser, onNewUser }: Props) {
+export function StepPhone({ onSent }: Props) {
   const [phone, setPhone] = useState("")
   const [error, setError] = useState("")
   const [isPending, startTransition] = useTransition()
 
-  const normalized = phone.replace(/\s/g, "")
-  const isValid = /^\d{9}$/.test(normalized)
+  const digits = normalizePhone(phone)
+  const isValid = digits.length === 9
 
-  function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     if (!isValid) {
       setError("Podaj poprawny 9-cyfrowy numer telefonu.")
       return
     }
-
     startTransition(async () => {
-      const exists = await checkPhoneExists(normalized)
+      const { error: err, isExisting } = await checkPhone(digits)
 
-      if (exists) {
-        onExistingUser(normalized)
-      } else {
-        const { error: otpError } = await sendOtp(normalized)
-        if (otpError) {
-          setError("Nie udało się wysłać kodu. Spróbuj ponownie.")
-          return
-        }
-        onNewUser(normalized)
+      if (err) {
+        setError("Nie udało się sprawdzić numeru. Spróbuj ponownie.")
+        return
       }
+      onSent({ phone: digits, isExisting })
     })
   }
 
@@ -49,19 +43,24 @@ export function StepPhone({ onExistingUser, onNewUser }: Props) {
       <h1 className="mb-1 font-display text-2xl font-light tracking-wide text-white sm:text-3xl">
         Zaloguj się
       </h1>
-      <p className="mb-10 text-sm font-light text-white/40">
+      <p className="mb-10 text-sm font-light text-white/45">
         Podaj numer telefonu, aby kontynuować.
       </p>
 
       <div className="mb-8">
         <label
           htmlFor="phone"
-          className="mb-3 block text-xs font-light tracking-[0.2em] text-white/40 uppercase"
+          className="mb-3 block text-xs font-light tracking-[0.2em] text-white/45 uppercase"
         >
           Numer telefonu
         </label>
         <div className="flex items-center gap-3 border-b border-white/15 pb-3 transition-colors focus-within:border-gold/40">
-          <span className="shrink-0 text-sm font-light text-white/30">+48</span>
+          <span
+            aria-hidden="true"
+            className="shrink-0 text-sm font-light text-white/30"
+          >
+            +48
+          </span>
           <div aria-hidden="true" className="h-4 w-px bg-white/10" />
           <input
             id="phone"
@@ -71,15 +70,19 @@ export function StepPhone({ onExistingUser, onNewUser }: Props) {
             autoFocus
             value={phone}
             onChange={(e) => {
-              setPhone(e.target.value)
+              setPhone(formatPhone(e.target.value))
               setError("")
             }}
             placeholder="XXX XXX XXX"
-            aria-describedby={error ? "phone-error" : undefined}
-            aria-invalid={!!error}
+            aria-describedby={error ? "phone-error" : "phone-hint"}
+            aria-invalid={!!error || undefined}
             className="w-full bg-transparent text-sm font-light text-white outline-none placeholder:text-white/20"
           />
         </div>
+        <p id="phone-hint" className="sr-only" aria-live="polite">
+          Podaj 9 cyfr bez numeru kierunkowego. Prefiks +48 jest dodawany
+          automatycznie.
+        </p>
         {error && (
           <p
             id="phone-error"
@@ -98,7 +101,7 @@ export function StepPhone({ onExistingUser, onNewUser }: Props) {
         className="w-full justify-between border-gold/50 px-6 py-4 tracking-widest uppercase disabled:opacity-60"
       >
         <span className="relative z-10">
-          {isPending ? "Sprawdzam..." : "Dalej"}
+          {isPending ? "Loguje..." : "Dalej"}
         </span>
         <ArrowRight size={14} aria-hidden="true" className="relative z-10" />
       </Button>

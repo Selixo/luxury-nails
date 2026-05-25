@@ -1,48 +1,30 @@
 "use client"
 
-import { useState, useTransition } from "react"
 import { Button } from "@workspace/ui/components/button"
 import { ArrowRight, Eye, EyeOff } from "lucide-react"
-import { completeRegistration } from "../actions"
+import { useStepRegister } from "../hooks/use-step-register"
 
 type Props = {
-  phone: string
   onSuccess: () => void
+  onCreated: () => void
 }
 
-export function StepRegister({ phone, onSuccess }: Props) {
-  const [name, setName] = useState("")
-  const [password, setPassword] = useState("")
-  const [confirm, setConfirm] = useState("")
-  const [visible, setVisible] = useState(false)
-  const [errors, setErrors] = useState<Record<string, string>>({})
-  const [isPending, startTransition] = useTransition()
+const inputClass =
+  "w-full border-b border-white/15 bg-transparent pb-3 text-sm font-light text-white transition-colors outline-none placeholder:text-white/20 focus:border-gold/40"
+const labelClass =
+  "mb-3 block text-xs font-light tracking-[0.2em] text-white/40 uppercase"
+const errorClass = "mt-2 text-xs font-light text-red-400/80"
 
-  function validate() {
-    const e: Record<string, string> = {}
-    if (!name.trim()) e.name = "Wpisz swoje imię."
-    if (password.length < 8)
-      e.password = "Hasło musi mieć co najmniej 8 znaków."
-    if (password !== confirm) e.confirm = "Hasła nie są identyczne."
-    return e
-  }
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    const errs = validate()
-    if (Object.keys(errs).length) {
-      setErrors(errs)
-      return
-    }
-    startTransition(async () => {
-      const { error } = await completeRegistration(name.trim(), password)
-      if (error) {
-        setErrors({ submit: error })
-        return
-      }
-      onSuccess()
-    })
-  }
+export function StepRegister({ onSuccess, onCreated }: Props) {
+  const {
+    fields,
+    errors,
+    visible,
+    isPending,
+    setField,
+    toggleVisible,
+    handleSubmit,
+  } = useStepRegister({ onSuccess, onCreated })
 
   return (
     <form onSubmit={handleSubmit} noValidate>
@@ -57,12 +39,8 @@ export function StepRegister({ phone, onSuccess }: Props) {
       </p>
 
       <div className="mb-6 flex flex-col gap-7">
-        {/* Name */}
         <div>
-          <label
-            htmlFor="name"
-            className="mb-3 block text-xs font-light tracking-[0.2em] text-white/40 uppercase"
-          >
+          <label htmlFor="name" className={labelClass}>
             Imię
           </label>
           <input
@@ -70,33 +48,44 @@ export function StepRegister({ phone, onSuccess }: Props) {
             type="text"
             autoComplete="given-name"
             autoFocus
-            value={name}
-            onChange={(e) => {
-              setName(e.target.value)
-              setErrors((p) => ({ ...p, name: "" }))
-            }}
+            value={fields.name}
+            onChange={(e) => setField("name")(e.target.value)}
             placeholder="np. Anna"
             aria-describedby={errors.name ? "name-error" : undefined}
             aria-invalid={!!errors.name}
-            className="w-full border-b border-white/15 bg-transparent pb-3 text-sm font-light text-white transition-colors outline-none placeholder:text-white/20 focus:border-gold/40"
+            className={inputClass}
           />
           {errors.name && (
-            <p
-              id="name-error"
-              role="alert"
-              className="mt-2 text-xs font-light text-red-400/80"
-            >
+            <p id="name-error" role="alert" className={errorClass}>
               {errors.name}
             </p>
           )}
         </div>
 
-        {/* Password */}
         <div>
-          <label
-            htmlFor="reg-password"
-            className="mb-3 block text-xs font-light tracking-[0.2em] text-white/40 uppercase"
-          >
+          <label htmlFor="lastName" className={labelClass}>
+            Nazwisko
+          </label>
+          <input
+            id="lastName"
+            type="text"
+            autoComplete="family-name"
+            value={fields.lastName}
+            onChange={(e) => setField("lastName")(e.target.value)}
+            placeholder="np. Kowalska"
+            aria-describedby={errors.lastName ? "lastName-error" : undefined}
+            aria-invalid={!!errors.lastName}
+            className={inputClass}
+          />
+          {errors.lastName && (
+            <p id="lastName-error" role="alert" className={errorClass}>
+              {errors.lastName}
+            </p>
+          )}
+        </div>
+
+        <div>
+          <label htmlFor="reg-password" className={labelClass}>
             Hasło
           </label>
           <div className="flex items-center gap-3 border-b border-white/15 pb-3 transition-colors focus-within:border-gold/40">
@@ -104,11 +93,8 @@ export function StepRegister({ phone, onSuccess }: Props) {
               id="reg-password"
               type={visible ? "text" : "password"}
               autoComplete="new-password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value)
-                setErrors((p) => ({ ...p, password: "" }))
-              }}
+              value={fields.password}
+              onChange={(e) => setField("password")(e.target.value)}
               placeholder="Min. 8 znaków"
               aria-describedby={
                 errors.password ? "reg-password-error" : undefined
@@ -118,52 +104,37 @@ export function StepRegister({ phone, onSuccess }: Props) {
             />
             <button
               type="button"
-              onClick={() => setVisible((v) => !v)}
+              onClick={toggleVisible}
               aria-label={visible ? "Ukryj hasło" : "Pokaż hasło"}
               className="shrink-0 text-white/25 transition-colors outline-none hover:text-white/50 focus-visible:text-gold"
             >
-              {visible ? <EyeOff size={14} /> : <Eye size={14} />}
+              {visible ? <Eye size={16} /> : <EyeOff size={16} />}
             </button>
           </div>
           {errors.password && (
-            <p
-              id="reg-password-error"
-              role="alert"
-              className="mt-2 text-xs font-light text-red-400/80"
-            >
+            <p id="reg-password-error" role="alert" className={errorClass}>
               {errors.password}
             </p>
           )}
         </div>
 
-        {/* Confirm */}
         <div>
-          <label
-            htmlFor="confirm"
-            className="mb-3 block text-xs font-light tracking-[0.2em] text-white/40 uppercase"
-          >
+          <label htmlFor="confirm" className={labelClass}>
             Powtórz hasło
           </label>
           <input
             id="confirm"
             type={visible ? "text" : "password"}
             autoComplete="new-password"
-            value={confirm}
-            onChange={(e) => {
-              setConfirm(e.target.value)
-              setErrors((p) => ({ ...p, confirm: "" }))
-            }}
+            value={fields.confirm}
+            onChange={(e) => setField("confirm")(e.target.value)}
             placeholder="••••••••"
             aria-describedby={errors.confirm ? "confirm-error" : undefined}
             aria-invalid={!!errors.confirm}
-            className="w-full border-b border-white/15 bg-transparent pb-3 text-sm font-light text-white transition-colors outline-none placeholder:text-white/20 focus:border-gold/40"
+            className={inputClass}
           />
           {errors.confirm && (
-            <p
-              id="confirm-error"
-              role="alert"
-              className="mt-2 text-xs font-light text-red-400/80"
-            >
+            <p id="confirm-error" role="alert" className={errorClass}>
               {errors.confirm}
             </p>
           )}

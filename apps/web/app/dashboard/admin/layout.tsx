@@ -7,23 +7,28 @@ import { SignOutButton } from "@/components/ui/sign-out-button"
 import { cn } from "@workspace/ui/lib/utils"
 
 const NAV = [
-  { href: "/panel/admin", label: "Przegląd", exact: true, badge: 0 },
-  { href: "/panel/admin/wizyty", label: "Wizyty", exact: false, badge: 2 },
-  { href: "/panel/admin/klientki", label: "Klientki", exact: false, badge: 0 },
+  { href: "/dashboard/admin", label: "Przegląd", exact: true, badge: 0 },
+  { href: "/dashboard/admin/wizyty", label: "Wizyty", exact: false, badge: 2 },
   {
-    href: "/panel/admin/kalendarz",
+    href: "/dashboard/admin/klientki",
+    label: "Klientki",
+    exact: false,
+    badge: 0,
+  },
+  {
+    href: "/dashboard/admin/kalendarz",
     label: "Kalendarz",
     exact: false,
     badge: 0,
   },
   {
-    href: "/panel/admin/podsumowanie",
+    href: "/dashboard/admin/podsumowanie",
     label: "Podsumowanie",
     exact: false,
     badge: 0,
   },
   {
-    href: "/panel/admin/ustawienia",
+    href: "/dashboard/admin/ustawienia",
     label: "Ustawienia",
     exact: false,
     badge: 0,
