@@ -1,45 +1,36 @@
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
-import { BannedScreen } from "./_components/banned-screen"
-import { KlientNav } from "./_components/klient-nav"
+import { getActiveBan } from "@/features/dashboard/actions"
+import { BannedScreen } from "../../../features/reservation/components/banned-screen"
+import { ClientNav } from "@/features/dashboard/components/client-nav"
+
+function formatDate(iso: string) {
+  return new Intl.DateTimeFormat("pl-PL", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(iso))
+}
 
 export default async function KlientLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  // const supabase = await createClient()
-  // let user = null
-  // try {
-  //   const { data } = await supabase.auth.getUser()
-  //   user = data.user
-  // } catch {
-  //   redirect("/reservation")
-  // }
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
-  // if (!user) redirect("/reservation")
+  if (!user) redirect("/reservation")
 
-  // const { data: ban } = await supabase
-  //   .from("bans")
-  //   .select("reason, note, banned_at")
-  //   .eq("client_id", user.id)
-  //   .maybeSingle()
+  const ban = await getActiveBan(user.id)
 
-  // if (ban) {
-  //   const bannedAt = new Intl.DateTimeFormat("pl-PL", {
-  //     day: "numeric",
-  //     month: "long",
-  //     year: "numeric",
-  //   }).format(new Date(ban.banned_at))
+  if (ban) {
+    return (
+      <BannedScreen reason={ban.reason} bannedAt={formatDate(ban.banned_at)} />
+    )
+  }
 
-  //   return (
-  //     <BannedScreen
-  //       reason={ban.reason}
-  //       note={ban.note ?? undefined}
-  //       bannedAt={bannedAt}
-  //     />
-  //   )
-  // }
-
-  return <KlientNav>{children}</KlientNav>
+  return <ClientNav>{children}</ClientNav>
 }
