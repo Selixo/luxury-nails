@@ -17,7 +17,11 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
     inlineCss: true,
+    serverActions: {
+      bodySizeLimit: "4mb",
+    },
   },
+
   transpilePackages: ["@workspace/ui"],
   images: {
     formats: ["image/avif", "image/webp"],
@@ -29,6 +33,11 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "picsum.photos",
+      },
+      {
+        protocol: "https",
+        hostname: "*.supabase.co",
+        pathname: "/storage/v1/object/public/**",
       },
     ],
   },

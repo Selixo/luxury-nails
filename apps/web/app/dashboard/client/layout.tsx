@@ -12,7 +12,7 @@ function formatDate(iso: string) {
   }).format(new Date(iso))
 }
 
-export default async function KlientLayout({
+export default async function ClientLayout({
   children,
 }: {
   children: React.ReactNode

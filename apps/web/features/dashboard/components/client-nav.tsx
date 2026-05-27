@@ -8,7 +8,7 @@ import { cn } from "@workspace/ui/lib/utils"
 
 const NAV = [
   { href: "/dashboard/client", label: "Przegląd", exact: true },
-  { href: "/dashboard/client/rezerwacja", label: "Nowa wizyta", exact: false },
+  { href: "/dashboard/client/booking", label: "Nowa wizyta", exact: false },
   { href: "/dashboard/client/historia", label: "Historia", exact: false },
   { href: "/dashboard/client/profil", label: "Profil", exact: false },
 ]
@@ -36,7 +36,7 @@ export function ClientNav({ children }: { children: React.ReactNode }) {
                   href={link.href}
                   className={cn(
                     "relative text-xs tracking-[0.2em] uppercase transition-colors duration-300 outline-none focus-visible:text-gold",
-                    isActive ? "text-gold" : "text-white/40 hover:text-white/70"
+                    isActive ? "text-gold" : "text-white/50 hover:text-white/70"
                   )}
                 >
                   {link.label}
@@ -51,7 +51,7 @@ export function ClientNav({ children }: { children: React.ReactNode }) {
             })}
           </nav>
 
-          <SignOutButton className="text-xs font-light tracking-[0.15em] text-white/25 uppercase transition-colors outline-none hover:text-white/50 focus-visible:text-gold" />
+          <SignOutButton className="text-xs font-light tracking-[0.15em] text-white/50 uppercase transition-colors outline-none hover:text-white/60 focus-visible:text-gold" />
         </div>
 
         <nav
