@@ -9,7 +9,7 @@ import { cn } from "@workspace/ui/lib/utils"
 const NAV = [
   { href: "/dashboard/client", label: "Przegląd", exact: true },
   { href: "/dashboard/client/booking", label: "Nowa wizyta", exact: false },
-  { href: "/dashboard/client/historia", label: "Historia", exact: false },
+  { href: "/dashboard/client/history", label: "Historia", exact: false },
   { href: "/dashboard/client/profil", label: "Profil", exact: false },
 ]
 

@@ -19,19 +19,19 @@ const STATS = [
 
 const QUICK_ACTIONS = [
   {
-    href: "/panel/klient/rezerwacja",
+    href: "/dashboard/client/booking",
     icon: CalendarDays,
     label: "Zarezerwuj wizytę",
     description: "Wybierz usługę i termin",
   },
   {
-    href: "/panel/klient/historia",
+    href: "/dashboard/client/history",
     icon: Clock,
     label: "Historia wizyt",
     description: "Przeglądaj poprzednie stylizacje",
   },
   {
-    href: "/panel/klient/profil",
+    href: "/dashboard/client/profil",
     icon: Sparkles,
     label: "Twój profil",
     description: "Dane i ustawienia konta",
@@ -152,7 +152,7 @@ export default function KlientPage() {
               </span>
             </div>
             <Link
-              href="/panel/klient/rezerwacja"
+              href="/dashboard/client/booking"
               className="mt-5 inline-block text-xs font-light text-white/25 transition-colors hover:text-gold"
             >
               Zarezerwuj nowy termin →

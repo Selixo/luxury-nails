@@ -17,6 +17,7 @@ import { DatePicker } from "@workspace/ui/components/date-picker"
 type Props = {
   services: Service[]
   userName: string
+  defaultServiceId?: string
 }
 
 const TEXT_AREA_MAX_LENGTH = 500
@@ -31,7 +32,7 @@ function formatDate(iso: string): string {
   }).format(new Date(iso + "T00:00:00"))
 }
 
-export function BookingForm({ services, userName }: Props) {
+export function BookingForm({ services, userName, defaultServiceId }: Props) {
   const [submitted, setSubmitted] = useState(false)
   const [isPending, startTransition] = useTransition()
 
@@ -46,7 +47,9 @@ export function BookingForm({ services, userName }: Props) {
   } = useForm<BookingFormValues>({
     resolver: zodResolver(bookingFormSchema),
     defaultValues: {
-      serviceId: "",
+      serviceId: services.some((s) => s.id === defaultServiceId)
+        ? (defaultServiceId ?? "")
+        : "",
       date: "",
       time: "",
       notes: "",
