@@ -21,6 +21,8 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         "gold-fill":
           "relative isolate overflow-hidden rounded-none border-gold/60 font-light tracking-wide text-gold transition-colors duration-500 before:absolute before:inset-0 before:z-[-1] before:-translate-x-full before:bg-gold before:transition-transform before:duration-500 before:ease-out hover:text-black hover:before:translate-x-0 focus-visible:border-gold/60 focus-visible:ring-2 focus-visible:ring-gold/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black",
+        "gold-outline":
+          "rounded-none border-gold/30 font-light tracking-[0.15em] text-gold/80 uppercase transition-colors hover:border-gold/50 hover:text-gold focus-visible:ring-1 focus-visible:ring-gold/40",
       },
       size: {
         default:
@@ -41,6 +43,11 @@ const buttonVariants = cva(
         variant: "gold-fill",
         size: "default",
         className: "h-auto gap-0 px-6 py-2.5 text-sm",
+      },
+      {
+        variant: "gold-outline",
+        size: "default",
+        className: "h-auto gap-0 px-5 py-2 text-xs",
       },
     ],
     defaultVariants: {
