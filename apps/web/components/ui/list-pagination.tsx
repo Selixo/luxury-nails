@@ -10,6 +10,7 @@ type Props = {
 
   extraQuery?: string
   ariaLabel?: string
+  formatTotal?: (total: number) => string
 }
 
 export function ListPagination({
@@ -18,6 +19,7 @@ export function ListPagination({
   total,
   extraQuery = "",
   ariaLabel = "Paginacja",
+  formatTotal,
 }: Props) {
   if (pages <= 1) return null
 
@@ -31,7 +33,10 @@ export function ListPagination({
       className="mt-6 flex items-center justify-between gap-4"
     >
       <p className="text-xs font-light text-white/50 tabular-nums">
-        Strona {page} z {pages} · {total} {total === 1 ? "wizyta" : "wizyt"}
+        Strona {page} z {pages} ·{" "}
+        {formatTotal
+          ? formatTotal(total)
+          : `${total} ${total === 1 ? "wizyta" : "wizyt"}`}
       </p>
 
       <ul className="flex items-center gap-1">

@@ -13,6 +13,7 @@ type Props<T extends string> = {
   ariaLabel: string
   className?: string
   extraQuery?: string
+  paramName?: string
 }
 
 export function FiltersNav<T extends string>({
@@ -22,6 +23,7 @@ export function FiltersNav<T extends string>({
   ariaLabel,
   className,
   extraQuery,
+  paramName = "status",
 }: Props<T>) {
   return (
     <nav aria-label={ariaLabel} className={cn("mb-6", className)}>
@@ -29,7 +31,7 @@ export function FiltersNav<T extends string>({
         {filters.map((f) => (
           <li key={f.id}>
             <Link
-              href={`?status=${f.id}&page=1${extraQuery ?? ""}`}
+              href={`?${paramName}=${f.id}&page=1${extraQuery ?? ""}`}
               aria-current={current === f.id ? "page" : undefined}
               className={cn(
                 "flex items-center gap-2 border px-3 py-1.5 text-xs font-light tracking-[0.15em] uppercase transition-colors",
