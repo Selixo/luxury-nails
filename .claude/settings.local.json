@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc:*)",
+      "Bash(npx shadcn@latest add dialog --yes)",
+      "Bash(mkdir -p features/dashboard/bookings/create)",
+      "Bash(cp -r features/dashboard/booking/. features/dashboard/bookings/create/)"
+    ]
+  }
+}

@@ -2,7 +2,7 @@ import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
 import { getActiveBan } from "@/features/dashboard/actions"
 import { BannedScreen } from "../../../features/reservation/components/banned-screen"
-import { ClientNav } from "@/features/dashboard/components/client-nav"
+import { ClientNav } from "@/components/ui/client-nav"
 
 function formatDate(iso: string) {
   return new Intl.DateTimeFormat("pl-PL", {

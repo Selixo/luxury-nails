@@ -53,13 +53,8 @@ export function VisitCard({
             </p>
           )}
           {visit.cancellation_reason && (
-            <p className="mt-1 text-xs font-light text-white/50">
+            <p className="mt-1.5 text-xs font-light text-red-400/80 italic">
               Powód anulowania: {visit.cancellation_reason}
-            </p>
-          )}
-          {visit.stylist_note && (
-            <p className="mt-1 text-xs font-light text-white/55">
-              Notatka stylisty: {visit.stylist_note}
             </p>
           )}
         </div>

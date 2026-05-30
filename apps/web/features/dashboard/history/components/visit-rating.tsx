@@ -73,7 +73,7 @@ export function VisitRating({
       ) : (
         <button
           onClick={handleOpen}
-          className="w-fit self-center text-[10px] font-light tracking-[0.15em] text-gold/75 uppercase transition-colors hover:text-gold/80"
+          className="w-fit text-[10px] font-light tracking-[0.15em] text-gold/75 uppercase transition-colors hover:text-gold/80"
         >
           + Oceń wizytę
         </button>

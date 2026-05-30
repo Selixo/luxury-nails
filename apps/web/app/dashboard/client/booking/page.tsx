@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
-import { getBookingPageData } from "@/features/dashboard/booking/actions"
-import { BookingForm } from "@/features/dashboard/booking/booking-form"
+import { getBookingPageData } from "@/features/dashboard/bookings/create/actions"
+import { BookingForm } from "@/features/dashboard/bookings/create/booking-form"
 
 export const metadata: Metadata = { title: "Nowa wizyta" }
 

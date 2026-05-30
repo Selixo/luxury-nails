@@ -13,6 +13,7 @@ import { InspirationUpload } from "./components/inspiration-upload"
 import { BookingSummary } from "./components/booking-summary"
 import { BookingSuccess } from "./components/booking-success"
 import { DatePicker } from "@workspace/ui/components/date-picker"
+import { CountedTextarea } from "@/components/ui/counted-textarea"
 
 type Props = {
   services: Service[]
@@ -156,28 +157,18 @@ export function BookingForm({ services, userName, defaultServiceId }: Props) {
               (opcjonalnie)
             </span>
           </label>
-          <textarea
+          <CountedTextarea
             id="notes"
             {...register("notes")}
+            value={notes}
             placeholder="np. preferowany wzór, alergie, inne uwagi..."
             rows={3}
             maxLength={TEXT_AREA_MAX_LENGTH}
-            className="w-full resize-none border-b border-white/15 bg-transparent pb-3 text-sm font-light text-white transition-colors outline-none placeholder:text-white/50 focus:border-gold/40"
+            showCountFrom={0}
+            warnAt={450}
+            error={errors.notes?.message}
+            variant="underline"
           />
-          <div className="mt-1.5 flex items-center justify-between">
-            {errors.notes ? (
-              <p role="alert" className="text-xs font-light text-red-400/80">
-                {errors.notes.message}
-              </p>
-            ) : (
-              <span />
-            )}
-            <span
-              className={`text-xxs font-light tabular-nums ${notes.length >= 450 ? "text-red-400" : "text-white/50"}`}
-            >
-              {notes.length}/{TEXT_AREA_MAX_LENGTH}
-            </span>
-          </div>
         </div>
 
         <InspirationUpload
