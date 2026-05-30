@@ -22,6 +22,7 @@ const nextConfig = {
     },
   },
 
+  serverExternalPackages: ["@react-pdf/renderer"],
   transpilePackages: ["@workspace/ui"],
   images: {
     formats: ["image/avif", "image/webp"],
