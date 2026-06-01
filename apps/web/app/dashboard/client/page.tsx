@@ -5,6 +5,8 @@ import { NoUpcomingBooking } from "@/features/dashboard/overview/components/no-u
 import { ClientStats } from "@/features/dashboard/overview/components/client-stats"
 import { QuickActions } from "@/features/dashboard/overview/components/quick-actions"
 
+export const dynamic = "force-dynamic"
+
 export const metadata: Metadata = { title: "Przegląd" }
 
 export default async function ClientPage() {

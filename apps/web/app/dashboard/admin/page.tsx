@@ -4,6 +4,8 @@ import { OverviewStats } from "@/features/dashboard/overview/components/overview
 import { UpcomingBookings } from "@/features/dashboard/overview/components/upcoming-bookings"
 import { TodaySchedule } from "@/features/dashboard/overview/components/today-schedule"
 
+export const dynamic = "force-dynamic"
+
 export const metadata: Metadata = { title: "Przegląd" }
 
 export default async function AdminPage() {

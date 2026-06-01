@@ -127,7 +127,7 @@ function formatWeekRange(dates: Date[]) {
     day: "numeric",
     month: "long",
   })
-  return `${fmt.format(dates[0])} – ${fmt.format(dates[5])} ${dates[0].getFullYear()}`
+  return `${fmt.format(dates[0])} – ${fmt.format(dates[5])} ${dates?.[0]?.getFullYear()}`
 }
 
 export default function KalendarzPage() {

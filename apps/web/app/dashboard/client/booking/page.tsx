@@ -2,6 +2,8 @@ import type { Metadata } from "next"
 import { getBookingPageData } from "@/features/dashboard/bookings/create/actions"
 import { BookingForm } from "@/features/dashboard/bookings/create/booking-form"
 
+export const dynamic = "force-dynamic"
+
 export const metadata: Metadata = { title: "Nowa wizyta" }
 
 export default async function BookingPage({
