@@ -56,7 +56,7 @@ function Calendar({
         dropdown: "absolute inset-0 opacity-0",
         caption_label:
           "text-xs font-light tracking-[0.2em] text-white/50 uppercase select-none",
-        table: "w-full border-collapse",
+        month_grid: "w-full border-collapse",
         weekdays: "flex",
         weekday:
           "flex-1 pb-2 text-center text-[10px] font-light tracking-widest text-white/25 uppercase select-none",
