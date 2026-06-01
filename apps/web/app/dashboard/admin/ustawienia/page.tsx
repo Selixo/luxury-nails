@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"
+
 import { getSettings, getServices } from "@/features/dashboard/settings/actions"
 import { WorkingHoursSection } from "@/features/dashboard/settings/components/working-hours-section"
 import { ServicesSection } from "@/features/dashboard/settings/components/services-section"

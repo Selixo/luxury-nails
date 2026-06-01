@@ -4,6 +4,8 @@ import { ProfileInfo } from "@/features/dashboard/profile/components/profile-inf
 import { ChangePasswordForm } from "@/features/dashboard/profile/components/change-password-form"
 import { DeleteAccountModal } from "@/features/dashboard/profile/components/delete-account-modal"
 
+export const dynamic = "force-dynamic"
+
 export const metadata: Metadata = { title: "Profil" }
 
 export default async function ProfilPage() {

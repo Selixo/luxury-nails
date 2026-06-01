@@ -7,6 +7,8 @@ import { ClientPagination } from "@/features/dashboard/clients/components/client
 import { ClientSearch } from "@/features/dashboard/clients/components/client-search"
 import type { ClientFilter } from "@/features/dashboard/clients/types"
 
+export const dynamic = "force-dynamic"
+
 export const metadata: Metadata = { title: "Klientki" }
 
 function parseFilter(raw: string | undefined): ClientFilter {

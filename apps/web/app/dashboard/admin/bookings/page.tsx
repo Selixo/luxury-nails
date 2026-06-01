@@ -10,6 +10,8 @@ import { BookingPagination } from "@/features/dashboard/bookings/components/book
 import { BookingSearch } from "@/features/dashboard/bookings/components/booking-search"
 import type { AdminStatusFilter } from "@/features/dashboard/bookings/types"
 
+export const dynamic = "force-dynamic"
+
 export const metadata: Metadata = { title: "Wizyty" }
 
 function parseStatus(raw: string | undefined): AdminStatusFilter {

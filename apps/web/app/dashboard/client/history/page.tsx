@@ -9,6 +9,8 @@ import { HistoryFilters } from "@/features/dashboard/history/components/history-
 import { HistoryPagination } from "@/features/dashboard/history/components/history-pagination"
 import type { HistoryStatus } from "@/features/dashboard/history/types"
 
+export const dynamic = "force-dynamic"
+
 export const metadata: Metadata = { title: "Historia wizyt" }
 
 function parseStatus(raw: string | undefined): HistoryStatus {

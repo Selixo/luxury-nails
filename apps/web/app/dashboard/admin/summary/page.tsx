@@ -14,6 +14,8 @@ import { ServiceBreakdown } from "@/features/dashboard/summary/components/servic
 import { PeakStats } from "@/features/dashboard/summary/components/peak-stats"
 import { ExportButtons } from "@/features/dashboard/summary/components/export-buttons"
 
+export const dynamic = "force-dynamic"
+
 export const metadata: Metadata = { title: "Summary" }
 
 function Section({
