@@ -88,14 +88,12 @@ export function ClientCard({ client, banActions, unbanActions }: Props) {
         </div>
       </div>
 
-      <div className="flex shrink-0 flex-row gap-6 sm:flex-col sm:items-end sm:gap-1.5">
+      <div className="flex flex-col gap-2 border-t border-white/5 pt-3 sm:shrink-0 sm:items-end sm:gap-1.5 sm:border-t-0 sm:pt-0">
         <div className="text-right">
-          <p className="font-display text-lg font-light text-gold/80">
+          <p className="text-lg font-light text-gold/80">
             {client.completedVisits}
           </p>
-          <p className="text-[10px] font-light tracking-[0.15em] text-white/50 uppercase">
-            wizyt
-          </p>
+          <p className="text-[10px] font-light text-white/50">wizyt</p>
         </div>
 
         {client.lastVisitDate && (

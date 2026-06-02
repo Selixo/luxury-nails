@@ -81,7 +81,7 @@ export function AdminMobileMenu({
                     style={{ animationDelay: `${i * 0.06}s` }}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-xxs text-gold/50">0{i + 1}</span>
+                      <span className="text-xxs text-gold/80">0{i + 1}</span>
                       {link.label}
                     </div>
                     {showBadge && (
@@ -100,7 +100,7 @@ export function AdminMobileMenu({
           </ul>
 
           <div className="mt-auto">
-            <SignOutButton className="text-xs font-light tracking-[0.15em] text-white/40 uppercase transition-colors outline-none hover:text-white/60 focus-visible:text-gold" />
+            <SignOutButton className="text-xs font-light tracking-[0.15em] text-white/50 uppercase transition-colors outline-none hover:text-white/60 focus-visible:text-gold" />
           </div>
         </div>
       </SheetContent>
