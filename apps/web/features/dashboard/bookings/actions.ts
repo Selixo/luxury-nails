@@ -3,6 +3,11 @@
 import { revalidatePath } from "next/cache"
 import { createClient } from "@/lib/supabase/server"
 import { createAdminClient } from "@/lib/supabase/admin"
+import {
+  ensureValidToken,
+  createCalendarEvent,
+  deleteCalendarEvent,
+} from "@/lib/google-calendar"
 import { BOOKINGS_LIMIT } from "./constants"
 import {
   type AdminBooking,
@@ -140,8 +145,91 @@ export async function updateBookingStatus(
     return { error: "Nie udało się zaktualizować statusu." }
   }
 
+  syncCalendar(admin, id, status).catch((err) =>
+    console.error("Calendar sync error:", err)
+  )
+
   revalidatePath("/dashboard/admin/bookings")
   return { error: null }
+}
+
+async function syncCalendar(
+  admin: ReturnType<typeof createAdminClient>,
+  bookingId: string,
+  status: "confirmed" | "completed" | "cancelled"
+): Promise<void> {
+  const { data: settings } = await admin
+    .from("settings")
+    .select(
+      "id, google_access_token, google_refresh_token, google_token_expiry"
+    )
+    .single()
+
+  if (!settings?.google_access_token || !settings?.google_refresh_token) return
+
+  const accessToken = await ensureValidToken(
+    {
+      id: settings.id,
+      google_access_token: settings.google_access_token,
+      google_refresh_token: settings.google_refresh_token,
+      google_token_expiry: settings.google_token_expiry,
+    },
+    async (newToken, newExpiry) => {
+      await admin
+        .from("settings")
+        .update({
+          google_access_token: newToken,
+          google_token_expiry: newExpiry,
+        } as never)
+        .eq("id", settings.id)
+    }
+  )
+
+  if (status === "confirmed") {
+    const { data: booking } = await admin
+      .from("bookings")
+      .select(
+        "id, date, time, client:profiles!bookings_client_id_fkey(name, last_name, phone), service:services(name, duration_min)"
+      )
+      .eq("id", bookingId)
+      .single()
+
+    if (!booking) return
+
+    const client = booking.client as {
+      name: string
+      last_name: string
+      phone: string
+    }
+    const service = booking.service as { name: string; duration_min: number }
+
+    const eventId = await createCalendarEvent(accessToken, {
+      summary: `${service.name} – ${client.name} ${client.last_name}`,
+      description: `Tel: ${client.phone}`,
+      date: booking.date,
+      time: booking.time,
+      durationMin: service.duration_min,
+    })
+
+    if (eventId) {
+      await admin
+        .from("bookings")
+        .update({ google_calendar_event_id: eventId } as never)
+        .eq("id", bookingId)
+    }
+  }
+
+  if (status === "cancelled") {
+    const { data: booking } = await admin
+      .from("bookings")
+      .select("google_calendar_event_id")
+      .eq("id", bookingId)
+      .single()
+
+    if (booking?.google_calendar_event_id) {
+      await deleteCalendarEvent(accessToken, booking.google_calendar_event_id)
+    }
+  }
 }
 
 export async function upsertStylistNote(
