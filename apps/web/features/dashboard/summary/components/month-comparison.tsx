@@ -27,7 +27,7 @@ export function MonthComparison({
       current: `${current.revenue} zł`,
       prev: `${prev.revenue} zł`,
       delta:
-        prev.revenue > 0
+        prev.revenue > 0 && current.revenue > 0
           ? Math.round(((current.revenue - prev.revenue) / prev.revenue) * 100)
           : null,
     },
@@ -36,7 +36,7 @@ export function MonthComparison({
       current: String(current.completedCount),
       prev: String(prev.completedCount),
       delta:
-        prev.completedCount > 0
+        prev.completedCount > 0 && current.completedCount > 0
           ? Math.round(
               ((current.completedCount - prev.completedCount) /
                 prev.completedCount) *
@@ -97,7 +97,7 @@ function Delta({ value }: { value: number | null }) {
     <span
       className={cn(
         "flex items-center justify-end gap-0.5 tabular-nums",
-        positive ? "text-emerald-400/70" : "text-red-400/70"
+        positive ? "text-emerald-400/70" : "text-red-400/80"
       )}
     >
       {positive ? <TrendingUp size={10} /> : <TrendingDown size={10} />}

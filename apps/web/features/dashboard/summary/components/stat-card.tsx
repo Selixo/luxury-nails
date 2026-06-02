@@ -41,7 +41,7 @@ export function StatCard({ label, value, sub, trend, accent }: Props) {
             ) : (
               <TrendingDown size={12} aria-hidden="true" />
             )}
-            {trend.value > 0 ? "+" : "-"}
+            {trend.value > 0 ? "+" : ""}
             {trend.value}%
           </span>
         )}
