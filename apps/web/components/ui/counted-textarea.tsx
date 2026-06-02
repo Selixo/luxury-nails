@@ -8,9 +8,7 @@ type Props = Omit<
   "maxLength"
 > & {
   maxLength: number
-  /** Show counter starting from this length. Defaults to 80% of maxLength. Pass 0 to always show. */
   showCountFrom?: number
-  /** Switch to red counter at this length. Defaults to 96% of maxLength. */
   warnAt?: number
   error?: string
   variant?: "modal" | "underline"
@@ -91,7 +89,7 @@ export const CountedTextarea = forwardRef<HTMLTextAreaElement, Props>(
             <p
               className={cn(
                 "text-right text-[10px] font-light tabular-nums",
-                count >= warnThreshold ? "text-red-400/70" : "text-white/30"
+                count >= warnThreshold ? "text-red-400/80" : "text-white/50"
               )}
             >
               {count}/{maxLength}

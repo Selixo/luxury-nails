@@ -6,7 +6,9 @@ export const bookingFormSchema = z.object({
     .string()
     .min(1, "Wybierz datę.")
     .refine((d) => {
-      const today = new Date().toISOString().split("T")[0]!
+      const today = new Date().toLocaleDateString("sv-SE", {
+        timeZone: "Europe/Warsaw",
+      })
       return d >= today
     }, "Nie można rezerwować terminu w przeszłości."),
   time: z.string().min(1, "Wybierz godzinę."),
