@@ -11,7 +11,7 @@ export default async function UstawieniaPage() {
   if (!settings) {
     return (
       <div className="px-6 py-12 md:px-12 md:py-16">
-        <p className="text-sm font-light text-white/30">
+        <p className="text-sm font-light text-white/45">
           Nie znaleziono ustawień salonu.
         </p>
       </div>

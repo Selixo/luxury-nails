@@ -64,7 +64,7 @@ export async function updateWorkingHours(
     return { error: "Nie udało się zapisać godzin pracy." }
   }
 
-  revalidatePath("/dashboard/admin/ustawienia")
+  revalidatePath("/dashboard/admin/settings")
   return { error: null }
 }
 
@@ -82,7 +82,7 @@ export async function updateService(
     return { error: "Nie udało się zapisać usługi." }
   }
 
-  revalidatePath("/dashboard/admin/ustawienia")
+  revalidatePath("/dashboard/admin/settings")
   return { error: null }
 }
 
@@ -117,6 +117,6 @@ export async function createService(fields: {
     return { error: "Nie udało się dodać usługi." }
   }
 
-  revalidatePath("/dashboard/admin/ustawienia")
+  revalidatePath("/dashboard/admin/settings")
   return { error: null }
 }

@@ -17,9 +17,9 @@ const NAV = [
   { href: "/dashboard/admin", label: "Przegląd", exact: true },
   { href: "/dashboard/admin/bookings", label: "Wizyty", exact: false },
   { href: "/dashboard/admin/clients", label: "Klientki", exact: false },
-  { href: "/dashboard/admin/kalendarz", label: "Kalendarz", exact: false },
+  { href: "/dashboard/admin/calendar", label: "Kalendarz", exact: false },
   { href: "/dashboard/admin/summary", label: "Podsumowanie", exact: false },
-  { href: "/dashboard/admin/ustawienia", label: "Ustawienia", exact: false },
+  { href: "/dashboard/admin/settings", label: "Ustawienia", exact: false },
 ]
 
 interface AdminMobileMenuProps {

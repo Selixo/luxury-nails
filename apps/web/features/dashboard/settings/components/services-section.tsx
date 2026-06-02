@@ -15,7 +15,7 @@ export function ServicesSection({ services }: Props) {
       <h2 className="mb-1 text-sm font-light tracking-[0.2em] text-white/60 uppercase">
         Cennik usług
       </h2>
-      <p className="mb-5 text-xs font-light text-white/25">
+      <p className="mb-5 text-xs font-light text-white/50">
         Ceny i czas trwania wyświetlane klientkom przy rezerwacji. Dezaktywowane
         usługi nie są widoczne podczas umawiania wizyty.
       </p>
@@ -24,7 +24,7 @@ export function ServicesSection({ services }: Props) {
         {categories.map(({ category, items }) => (
           <div key={category}>
             <div className="border-b border-white/5 bg-white/[0.015] px-5 py-2">
-              <p className="text-[10px] font-light tracking-[0.25em] text-white/30 uppercase">
+              <p className="text-[10px] font-light tracking-[0.25em] text-white/45 uppercase">
                 {category}
               </p>
             </div>

@@ -2,6 +2,13 @@
 
 import { useState, useTransition } from "react"
 import { cn } from "@workspace/ui/lib/utils"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@workspace/ui/components/select"
 import { updateWorkingHours } from "../actions"
 import type { DayKey, DayConfig, WorkingHours, SettingsRow } from "../types"
 
@@ -83,20 +90,28 @@ export function WorkingHoursSection({ settings }: Props) {
       </div>
 
       <div className="mt-4 flex items-center gap-3">
-        <label className="text-xs font-light text-white/35">
+        <label className="text-xs font-light text-white/50">
           Przerwa między wizytami:
         </label>
-        <select
-          value={breakMin}
-          onChange={(e) => setBreakMin(Number(e.target.value))}
-          className="border border-white/10 bg-[#09090b] px-3 py-1.5 text-xs font-light text-white/60 transition-colors outline-none focus:border-white/20"
+        <Select
+          value={String(breakMin)}
+          onValueChange={(v) => setBreakMin(Number(v))}
         >
-          {BREAK_OPTIONS.map((o) => (
-            <option key={o.value} value={o.value}>
-              {o.label}
-            </option>
-          ))}
-        </select>
+          <SelectTrigger className="h-auto w-36 border-white/10 bg-[#09090b] px-3 py-1.5 text-xs font-light text-white/60 transition-colors focus:border-white/20 focus:ring-0">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent className="border-white/10 bg-[#09090b] text-xs font-light text-white/60">
+            {BREAK_OPTIONS.map((o) => (
+              <SelectItem
+                key={o.value}
+                value={String(o.value)}
+                className="text-xs font-light"
+              >
+                {o.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
       {error && (
@@ -134,6 +149,7 @@ function DayRow({ label, config, onToggle, onTimeChange }: DayRowProps) {
         <button
           role="switch"
           aria-checked={config.enabled}
+          aria-label={`${label} – włącz dzień`}
           onClick={onToggle}
           className={cn(
             "relative h-5 w-9 rounded-full border transition-colors outline-none focus-visible:ring-1 focus-visible:ring-gold/50",
@@ -159,14 +175,18 @@ function DayRow({ label, config, onToggle, onTimeChange }: DayRowProps) {
           type="time"
           value={config.start}
           disabled={!config.enabled}
+          aria-label={`${label} - godzina otwarcia`}
           onChange={(e) => onTimeChange("start", e.target.value)}
           className="border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs font-light text-white/60 [color-scheme:dark] transition-colors outline-none focus:border-white/20 disabled:cursor-not-allowed"
         />
-        <span className="text-xs font-light text-white/20">—</span>
+        <span className="text-xs font-light text-white/50" aria-hidden="true">
+          —
+        </span>
         <input
           type="time"
           value={config.end}
           disabled={!config.enabled}
+          aria-label={`${label} – godzina zamknięcia`}
           onChange={(e) => onTimeChange("end", e.target.value)}
           className="border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs font-light text-white/60 [color-scheme:dark] transition-colors outline-none focus:border-white/20 disabled:cursor-not-allowed"
         />
