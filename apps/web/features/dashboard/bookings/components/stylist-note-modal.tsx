@@ -59,7 +59,7 @@ export function StylistNoteModal({
       <div className="mt-3 flex flex-col items-start gap-3">
         {existingNote ? (
           <p className="line-clamp-2 text-xs font-light text-white/50 italic">
-            Notatka stylisty:{existingNote}
+            Notatka stylisty: {existingNote}
           </p>
         ) : (
           <p className="text-xs font-light text-white/50 italic">

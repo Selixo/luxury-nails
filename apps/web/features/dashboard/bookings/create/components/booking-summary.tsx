@@ -95,7 +95,7 @@ export function BookingSummary({
               <>
                 <div aria-hidden="true" className="h-px bg-white/5" />
                 <div>
-                  <p className="mb-2 text-xxs font-light tracking-[0.2em] text-white/25 uppercase">
+                  <p className="mb-2 text-xxs font-light tracking-[0.2em] text-white/55 uppercase">
                     Inspiracja
                   </p>
                   <Image
