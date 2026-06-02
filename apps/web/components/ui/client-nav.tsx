@@ -4,6 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Logo } from "@/components/ui/logo"
 import { SignOutButton } from "@/components/ui/sign-out-button"
+import { ClientBottomNav } from "@/components/ui/client-bottom-nav"
 import { cn } from "@workspace/ui/lib/utils"
 
 const NAV = [
@@ -53,32 +54,12 @@ export function ClientNav({ children }: { children: React.ReactNode }) {
 
           <SignOutButton className="text-xs font-light tracking-[0.15em] text-white/50 uppercase transition-colors outline-none hover:text-white/60 focus-visible:text-gold" />
         </div>
-
-        <nav
-          className="flex items-center gap-5 overflow-x-auto px-6 pb-3 md:hidden"
-          aria-label="Nawigacja mobilna"
-        >
-          {NAV.map((link) => {
-            const isActive = link.exact
-              ? pathname === link.href
-              : pathname.startsWith(link.href)
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "shrink-0 text-xs tracking-[0.15em] uppercase transition-colors duration-300",
-                  isActive ? "text-gold" : "text-white/35 hover:text-white/60"
-                )}
-              >
-                {link.label}
-              </Link>
-            )
-          })}
-        </nav>
       </header>
 
-      <main id="main-content">{children}</main>
+      <main id="main-content" className="pb-20 md:pb-0">
+        {children}
+      </main>
+      <ClientBottomNav />
     </div>
   )
 }
