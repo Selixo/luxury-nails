@@ -49,7 +49,7 @@ export function ClientBottomNav() {
                 href={href}
                 className={cn(
                   "flex flex-col items-center gap-1 py-3 transition-colors duration-300 outline-none focus-visible:text-gold",
-                  isActive ? "text-gold" : "text-white/30 hover:text-white/50"
+                  isActive ? "text-gold" : "text-white/50 hover:text-white/60"
                 )}
               >
                 <Icon size={20} strokeWidth={1.5} aria-hidden="true" />

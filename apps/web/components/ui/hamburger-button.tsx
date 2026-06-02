@@ -16,7 +16,7 @@ export function Hamburger({ open, onClick, className }: HamburgerProps) {
       aria-label={open ? "Zamknij menu" : "Otwórz menu"}
       aria-expanded={open}
       className={cn(
-        "relative flex h-10 w-10 cursor-pointer flex-col items-center justify-center gap-1.5 transition-colors",
+        "relative flex h-10 w-10 cursor-pointer flex-col items-center justify-center gap-1.5 transition-colors lg:hidden",
         className
       )}
     >

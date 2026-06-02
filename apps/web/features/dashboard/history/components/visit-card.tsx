@@ -33,11 +33,11 @@ export function VisitCard({
   return (
     <article className="flex flex-col gap-3 px-6 py-5">
       <div className="flex flex-col gap-1.5 sm:flex-row sm:items-start sm:justify-between">
-        <div className="flex-1">
+        <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-            <h3 className="text-sm font-light text-white/80">
+            <h2 className="text-sm font-light text-white/80">
               {visit.services?.name ?? "Usługa niedostępna"}
-            </h3>
+            </h2>
             <span
               className={cn(
                 "rounded-sm border px-2 py-0.5 text-[10px] tracking-[0.15em] uppercase",
@@ -48,12 +48,12 @@ export function VisitCard({
             </span>
           </div>
           {visit.notes && (
-            <p className="mt-1 text-xs font-light text-white/50 italic">
+            <p className="mt-1 line-clamp-3 text-xs font-light break-words text-white/50 italic">
               {visit.notes}
             </p>
           )}
           {visit.cancellation_reason && (
-            <p className="mt-1.5 text-xs font-light text-red-400/80 italic">
+            <p className="mt-1.5 text-xs font-light break-words text-red-400/80 italic">
               Powód anulowania: {visit.cancellation_reason}
             </p>
           )}

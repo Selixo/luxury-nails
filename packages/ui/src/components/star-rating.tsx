@@ -18,7 +18,7 @@ export function StarRating({ value, onChange, size = 16, className }: Props) {
   return (
     <div
       className={cn("flex gap-1", className)}
-      role={interactive ? "group" : undefined}
+      role={interactive ? "radiogroup" : "img"}
       aria-label={interactive ? "Wybierz ocenę" : `Ocena: ${value} z 5`}
     >
       {[1, 2, 3, 4, 5].map((s) => {
@@ -46,7 +46,8 @@ export function StarRating({ value, onChange, size = 16, className }: Props) {
             type="button"
             onClick={() => onChange(s)}
             aria-label={`${s} ${s === 1 ? "gwiazdka" : s < 5 ? "gwiazdki" : "gwiazdek"}`}
-            aria-pressed={filled}
+            role="radio"
+            aria-checked={filled}
             className="outline-none"
           >
             <Star

@@ -78,11 +78,9 @@ export function AdminHeader({ pendingCount }: Props) {
 
           <div className="flex items-center gap-3">
             <SignOutButton className="hidden text-xs font-light tracking-[0.15em] text-white/50 uppercase transition-colors outline-none hover:text-white/60 focus-visible:text-gold xl:block" />
-            <Hamburger
-              open={menuOpen}
-              onClick={() => setMenuOpen(true)}
-              className="xl:hidden"
-            />
+            <div className="xl:hidden">
+              <Hamburger open={menuOpen} onClick={() => setMenuOpen(true)} />
+            </div>
           </div>
         </div>
       </header>

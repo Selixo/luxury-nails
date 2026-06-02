@@ -65,7 +65,7 @@ export function VisitRating({
             </button>
           </div>
           {rating.comment && (
-            <p className="line-clamp-2 text-xs font-light text-white/50">
+            <p className="line-clamp-2 text-xs font-light break-words text-white/50">
               {rating.comment}
             </p>
           )}
