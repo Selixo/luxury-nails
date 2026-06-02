@@ -21,7 +21,7 @@ function parsePage(raw: string | undefined): number {
   return Number.isFinite(n) && n > 0 ? n : 1
 }
 
-export default async function KlientkiPage({
+export default async function ClientsPage({
   searchParams,
 }: {
   searchParams: Promise<{ page?: string; filter?: string; q?: string }>

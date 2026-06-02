@@ -106,7 +106,7 @@ const ACTIONS: Record<AdminBookingStatus, (props: ActionProps) => ReactNode> = {
 
   cancelled: ({ booking }) =>
     booking.cancellation_reason ? (
-      <p className="mt-1.5 text-xs font-light text-red-400/80 italic">
+      <p className="mt-1.5 text-xs font-light break-words text-red-400/80 italic">
         Powód anulowania: {booking.cancellation_reason}
       </p>
     ) : null,

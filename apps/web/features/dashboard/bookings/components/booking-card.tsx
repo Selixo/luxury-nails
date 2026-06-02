@@ -50,7 +50,7 @@ export function BookingCard({
         </p>
 
         {booking.notes && (
-          <p className="mt-1.5 text-xs font-light text-white/50 italic">
+          <p className="mt-1.5 line-clamp-3 text-xs font-light break-words text-white/50 italic">
             {booking.notes}
           </p>
         )}
