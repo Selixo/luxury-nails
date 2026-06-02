@@ -67,7 +67,11 @@ export function StickyNav() {
               <Link href="/logowanie">Umów wizytę</Link>
             </Button>
 
-            <Hamburger open={menuOpen} onClick={() => setMenuOpen(true)} />
+            <Hamburger
+              open={menuOpen}
+              onClick={() => setMenuOpen(true)}
+              className="lg:hidden"
+            />
           </div>
         </div>
 
