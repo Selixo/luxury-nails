@@ -23,7 +23,7 @@ export function ServiceRow({ service }: Props) {
     startTransition(async () => {
       const result = await updateService(service.id, { active: next })
       if (result.error) {
-        setActive(!next) // rollback
+        setActive(!next)
         setError(result.error)
       }
     })
@@ -70,7 +70,6 @@ export function ServiceRow({ service }: Props) {
         !active && "opacity-50"
       )}
     >
-      {/* Active toggle */}
       <button
         role="switch"
         aria-checked={active}
@@ -92,34 +91,32 @@ export function ServiceRow({ service }: Props) {
         />
       </button>
 
-      {/* Name */}
       <p className="flex-1 text-sm font-light text-white/70">{service.name}</p>
 
       {isEditing ? (
         <div className="flex flex-wrap items-center gap-3">
           <div className="flex items-center gap-1.5">
             <input
-              type="number"
+              type="text"
+              inputMode="decimal"
               value={price}
-              min={0}
               onChange={(e) => setPrice(e.target.value)}
               disabled={isPending}
               className="w-16 border border-white/15 bg-white/[0.03] px-2 py-1 text-right text-xs font-light text-white/70 transition-colors outline-none focus:border-gold/25 disabled:opacity-50"
             />
-            <span className="text-xs font-light text-white/30">zł</span>
+            <span className="text-xs font-light text-white/50">zł</span>
           </div>
 
           <div className="flex items-center gap-1.5">
             <input
-              type="number"
+              type="text"
+              inputMode="numeric"
               value={duration}
-              min={5}
-              step={5}
               onChange={(e) => setDuration(e.target.value)}
               disabled={isPending}
               className="w-14 border border-white/15 bg-white/[0.03] px-2 py-1 text-right text-xs font-light text-white/70 transition-colors outline-none focus:border-gold/25 disabled:opacity-50"
             />
-            <span className="text-xs font-light text-white/30">min</span>
+            <span className="text-xs font-light text-white/50">min</span>
           </div>
 
           {error && (
@@ -129,29 +126,30 @@ export function ServiceRow({ service }: Props) {
           <button
             onClick={handleSave}
             disabled={isPending}
-            className="text-xs font-light text-gold/60 transition-colors outline-none hover:text-gold disabled:opacity-40"
+            className="text-xs font-light text-gold/80 transition-colors hover:text-gold disabled:opacity-40"
           >
             {isPending ? "…" : "Gotowe"}
           </button>
           <button
             onClick={handleCancel}
             disabled={isPending}
-            className="text-xs font-light text-white/25 transition-colors outline-none hover:text-white/50 disabled:opacity-40"
+            className="text-xs font-light text-white/50 transition-colors hover:text-white/60 disabled:opacity-40"
           >
             Anuluj
           </button>
         </div>
       ) : (
         <div className="flex items-center gap-4 sm:ml-auto">
-          <span className="text-xs font-light text-white/35">
+          <span className="text-xs font-light text-white/50">
             {service.duration_min} min
           </span>
-          <span className="min-w-[3.5rem] text-right text-sm font-light text-gold/70">
+          <span className="min-w-[3.5rem] text-right text-sm font-light text-gold/80">
             {service.price} zł
           </span>
           <button
             onClick={() => setIsEditing(true)}
-            className="text-xs font-light text-white/20 transition-colors outline-none hover:text-white/55"
+            className="text-xs font-light text-white/50 transition-colors hover:text-white/60"
+            disabled={!active}
           >
             Edytuj
           </button>

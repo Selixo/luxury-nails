@@ -75,6 +75,7 @@ export type Database = {
           client_id: string
           created_at: string
           date: string
+          google_calendar_event_id: string | null
           id: string
           inspiration_url: string | null
           notes: string | null
@@ -88,6 +89,7 @@ export type Database = {
           client_id: string
           created_at?: string
           date: string
+          google_calendar_event_id?: string | null
           id?: string
           inspiration_url?: string | null
           notes?: string | null
@@ -101,6 +103,7 @@ export type Database = {
           client_id?: string
           created_at?: string
           date?: string
+          google_calendar_event_id?: string | null
           id?: string
           inspiration_url?: string | null
           notes?: string | null
@@ -236,16 +239,28 @@ export type Database = {
       settings: {
         Row: {
           break_min: number
+          google_access_token: string | null
+          google_connected_email: string | null
+          google_refresh_token: string | null
+          google_token_expiry: string | null
           id: string
           working_hours: Json
         }
         Insert: {
           break_min?: number
+          google_access_token?: string | null
+          google_connected_email?: string | null
+          google_refresh_token?: string | null
+          google_token_expiry?: string | null
           id?: string
           working_hours?: Json
         }
         Update: {
           break_min?: number
+          google_access_token?: string | null
+          google_connected_email?: string | null
+          google_refresh_token?: string | null
+          google_token_expiry?: string | null
           id?: string
           working_hours?: Json
         }

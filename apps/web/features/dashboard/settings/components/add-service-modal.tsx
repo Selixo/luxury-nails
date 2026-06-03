@@ -2,6 +2,7 @@
 
 import { useState, useTransition, useRef, useEffect } from "react"
 import { Plus, X } from "lucide-react"
+import { cn } from "@workspace/ui/lib/utils"
 import {
   Dialog,
   DialogClose,
@@ -79,7 +80,7 @@ export function AddServiceModal({ existingCategories }: Props) {
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <button className="flex items-center gap-2 border border-dashed border-white/10 px-5 py-3 text-xs font-light tracking-[0.15em] text-white/30 uppercase transition-colors hover:border-gold/25 hover:text-gold/70 focus-visible:ring-1 focus-visible:ring-gold/40 focus-visible:outline-none">
+        <button className="flex items-center gap-2 border border-dashed border-white/10 px-5 py-3 text-xs font-light tracking-[0.15em] text-white/50 uppercase transition-colors hover:border-gold/25 hover:text-gold/70 focus-visible:ring-1 focus-visible:ring-gold/40 focus-visible:outline-none">
           <Plus size={12} aria-hidden="true" />
           Dodaj usługę
         </button>
@@ -93,7 +94,7 @@ export function AddServiceModal({ existingCategories }: Props) {
 
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-[10px] font-light tracking-[0.2em] text-gold/70 uppercase">
+            <p className="text-[10px] font-light tracking-[0.2em] text-gold/80 uppercase">
               Nowa usługa
             </p>
             <p className="mt-1 text-sm font-light text-white/70">
@@ -144,9 +145,8 @@ export function AddServiceModal({ existingCategories }: Props) {
           <div className="flex gap-4">
             <Field label="Cena (zł)" required className="flex-1">
               <input
-                type="number"
-                min={0}
-                step={1}
+                type="text"
+                inputMode="decimal"
                 value={form.price}
                 onChange={(e) => field("price", e.target.value)}
                 placeholder="110"
@@ -157,9 +157,8 @@ export function AddServiceModal({ existingCategories }: Props) {
 
             <Field label="Czas (min)" required className="flex-1">
               <input
-                type="number"
-                min={5}
-                step={5}
+                type="text"
+                inputMode="numeric"
                 value={form.duration_min}
                 onChange={(e) => field("duration_min", e.target.value)}
                 placeholder="60"
@@ -183,7 +182,7 @@ export function AddServiceModal({ existingCategories }: Props) {
           <DialogClose asChild>
             <button
               disabled={isPending}
-              className="text-xs font-light text-white/30 transition-colors hover:text-white/60 disabled:opacity-50"
+              className="text-xs font-light text-white/50 transition-colors hover:text-white/60 disabled:opacity-50"
             >
               Anuluj
             </button>
@@ -206,12 +205,12 @@ function Field({
   className?: string
 }) {
   return (
-    <div className={className}>
-      <label className="mb-1.5 block text-[10px] font-light tracking-[0.2em] text-white/40 uppercase">
+    <label className={cn("block", className)}>
+      <span className="mb-1.5 block text-[10px] font-light tracking-[0.2em] text-white/50 uppercase">
         {label}
-        {required && <span className="ml-1 text-gold/50">*</span>}
-      </label>
+        {required && <span className="ml-1 text-gold/80">*</span>}
+      </span>
       {children}
-    </div>
+    </label>
   )
 }

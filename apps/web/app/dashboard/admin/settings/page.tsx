@@ -5,13 +5,21 @@ import { WorkingHoursSection } from "@/features/dashboard/settings/components/wo
 import { ServicesSection } from "@/features/dashboard/settings/components/services-section"
 import { GoogleCalendarSection } from "@/features/dashboard/settings/components/google-calendar-section"
 
-export default async function UstawieniaPage() {
-  const [settings, services] = await Promise.all([getSettings(), getServices()])
+export default async function UstawieniaPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ google_error?: string }>
+}) {
+  const [{ google_error }, settings, services] = await Promise.all([
+    searchParams,
+    getSettings(),
+    getServices(),
+  ])
 
   if (!settings) {
     return (
       <div className="px-6 py-12 md:px-12 md:py-16">
-        <p className="text-sm font-light text-white/30">
+        <p className="text-sm font-light text-white/45">
           Nie znaleziono ustawień salonu.
         </p>
       </div>
@@ -32,7 +40,10 @@ export default async function UstawieniaPage() {
 
         <WorkingHoursSection settings={settings} />
         <ServicesSection services={services} />
-        <GoogleCalendarSection />
+        <GoogleCalendarSection
+          settings={settings}
+          googleError={!!google_error}
+        />
       </div>
     </div>
   )
