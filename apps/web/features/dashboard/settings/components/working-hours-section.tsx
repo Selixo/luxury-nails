@@ -72,7 +72,7 @@ export function WorkingHoursSection({ settings }: Props) {
       <h2 className="mb-1 text-sm font-light tracking-[0.2em] text-white/60 uppercase">
         Godziny pracy
       </h2>
-      <p className="mb-5 text-xs font-light text-white/25">
+      <p className="mb-5 text-xs font-light text-white/50">
         Ustaw dostępność salonu w poszczególne dni tygodnia.
       </p>
 
@@ -137,7 +137,16 @@ type DayRowProps = {
   onTimeChange: (field: "start" | "end", value: string) => void
 }
 
-function DayRow({ label, config, onToggle, onTimeChange }: DayRowProps) {
+function DayRow({
+  dayKey,
+  label,
+  config,
+  onToggle,
+  onTimeChange,
+}: DayRowProps) {
+  const startId = `${dayKey}-start`
+  const endId = `${dayKey}-end`
+
   return (
     <div
       className={cn(
@@ -171,22 +180,28 @@ function DayRow({ label, config, onToggle, onTimeChange }: DayRowProps) {
       </div>
 
       <div className="flex items-center gap-3">
+        <label htmlFor={startId} className="sr-only">
+          {label} - godzina otwarcia
+        </label>
         <input
+          id={startId}
           type="time"
           value={config.start}
           disabled={!config.enabled}
-          aria-label={`${label} - godzina otwarcia`}
           onChange={(e) => onTimeChange("start", e.target.value)}
           className="border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs font-light text-white/60 [color-scheme:dark] transition-colors outline-none focus:border-white/20 disabled:cursor-not-allowed"
         />
         <span className="text-xs font-light text-white/50" aria-hidden="true">
           —
         </span>
+        <label htmlFor={endId} className="sr-only">
+          {label} –-godzina zamknięcia
+        </label>
         <input
+          id={endId}
           type="time"
           value={config.end}
           disabled={!config.enabled}
-          aria-label={`${label} – godzina zamknięcia`}
           onChange={(e) => onTimeChange("end", e.target.value)}
           className="border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs font-light text-white/60 [color-scheme:dark] transition-colors outline-none focus:border-white/20 disabled:cursor-not-allowed"
         />

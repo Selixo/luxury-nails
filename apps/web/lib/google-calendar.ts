@@ -70,18 +70,21 @@ export async function createCalendarEvent(
   data: CalendarEventData
 ): Promise<string | null> {
   const time = data.time.slice(0, 5)
-  const parts = time.split(":")
-  const h = Number(parts[0])
-  const m = Number(parts[1])
+  const [hStr, mStr] = time.split(":")
+  const h = Number(hStr)
+  const m = Number(mStr)
+
   const endMinutes = h * 60 + m + data.durationMin
+  const overflowDays = Math.floor(endMinutes / (24 * 60))
   const endH = Math.floor((endMinutes % (24 * 60)) / 60)
     .toString()
     .padStart(2, "0")
   const endM = (endMinutes % 60).toString().padStart(2, "0")
 
-  const startDate = new Date(`${data.date}T${time}:00`)
-  const endDate = new Date(startDate.getTime() + data.durationMin * 60 * 1000)
-  const endDateStr = endDate.toISOString().slice(0, 10)
+  // Compute end date purely from UTC noon to avoid server-timezone drift
+  const startUtcNoon = new Date(`${data.date}T12:00:00Z`)
+  startUtcNoon.setUTCDate(startUtcNoon.getUTCDate() + overflowDays)
+  const endDateStr = startUtcNoon.toISOString().slice(0, 10)
 
   const body = {
     summary: data.summary,
@@ -146,4 +149,32 @@ export async function getUserEmail(
   if (!res.ok) return null
   const data = await res.json()
   return data.email ?? null
+}
+
+export async function setupCalendarNotifications(
+  accessToken: string,
+  calendarId: string
+): Promise<void> {
+  const res = await fetch(
+    `${GOOGLE_CALENDAR_BASE}/users/me/calendarList/${encodeURIComponent(calendarId)}`,
+    {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        notificationSettings: {
+          notifications: [
+            { type: "eventCreation", method: "email" },
+            { type: "eventChange", method: "email" },
+            { type: "eventCancellation", method: "email" },
+          ],
+        },
+      }),
+    }
+  )
+  if (!res.ok) {
+    console.error("setupCalendarNotifications failed:", await res.text())
+  }
 }

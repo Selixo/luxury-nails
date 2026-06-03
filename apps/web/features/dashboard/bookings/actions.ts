@@ -180,7 +180,7 @@ async function syncCalendar(
         .update({
           google_access_token: newToken,
           google_token_expiry: newExpiry,
-        } as never)
+        })
         .eq("id", settings.id)
     }
   )
@@ -214,7 +214,7 @@ async function syncCalendar(
     if (eventId) {
       await admin
         .from("bookings")
-        .update({ google_calendar_event_id: eventId } as never)
+        .update({ google_calendar_event_id: eventId })
         .eq("id", bookingId)
     }
   }

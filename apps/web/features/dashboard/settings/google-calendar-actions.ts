@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation"
 import { revalidatePath } from "next/cache"
+import { cookies } from "next/headers"
 import { createAdminClient } from "@/lib/supabase/admin"
 import { createClient } from "@/lib/supabase/server"
 
@@ -22,24 +23,35 @@ async function verifyAdmin(): Promise<boolean> {
   return data?.role === "admin"
 }
 
-function buildOAuthUrl(): string {
+async function buildOAuthUrl(): Promise<string> {
+  const state = crypto.randomUUID()
+  const cookieStore = await cookies()
+  cookieStore.set("oauth_state", state, {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+    maxAge: 600,
+    path: "/",
+  })
+
   const params = new URLSearchParams({
     client_id: process.env.GOOGLE_CLIENT_ID!,
     redirect_uri: process.env.GOOGLE_REDIRECT_URI!,
     response_type: "code",
     scope: [
-      "https://www.googleapis.com/auth/calendar.events",
+      "https://www.googleapis.com/auth/calendar",
       "https://www.googleapis.com/auth/userinfo.email",
     ].join(" "),
     access_type: "offline",
     prompt: "consent",
+    state,
   })
   return `https://accounts.google.com/o/oauth2/v2/auth?${params}`
 }
 
 export async function connectGoogleCalendar(): Promise<void> {
   if (!(await verifyAdmin())) return
-  redirect(buildOAuthUrl())
+  redirect(await buildOAuthUrl())
 }
 
 export async function disconnectGoogleCalendar(): Promise<{
@@ -68,7 +80,7 @@ export async function disconnectGoogleCalendar(): Promise<{
         google_refresh_token: null,
         google_token_expiry: null,
         google_connected_email: null,
-      } as never)
+      })
       .eq("id", settings.id)
   }
 

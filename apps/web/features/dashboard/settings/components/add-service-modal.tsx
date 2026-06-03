@@ -80,7 +80,7 @@ export function AddServiceModal({ existingCategories }: Props) {
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <button className="flex items-center gap-2 border border-dashed border-white/10 px-5 py-3 text-xs font-light tracking-[0.15em] text-white/30 uppercase transition-colors hover:border-gold/25 hover:text-gold/70 focus-visible:ring-1 focus-visible:ring-gold/40 focus-visible:outline-none">
+        <button className="flex items-center gap-2 border border-dashed border-white/10 px-5 py-3 text-xs font-light tracking-[0.15em] text-white/50 uppercase transition-colors hover:border-gold/25 hover:text-gold/70 focus-visible:ring-1 focus-visible:ring-gold/40 focus-visible:outline-none">
           <Plus size={12} aria-hidden="true" />
           Dodaj usługę
         </button>
