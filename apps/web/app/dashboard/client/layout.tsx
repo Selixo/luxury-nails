@@ -24,7 +24,7 @@ export default async function ClientLayout({
 
   if (!user) redirect("/reservation")
 
-  const ban = await getActiveBan(user.id)
+  const ban = await getActiveBan(user.id).catch(() => null)
 
   if (ban) {
     return (
