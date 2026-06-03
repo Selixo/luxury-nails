@@ -22,14 +22,14 @@ export function parseHourCeil(time: string): number {
 }
 
 export function formatWeekRange(days: EnabledDay[]): string {
-  if (days.length === 0) return ""
+  const first = days[0]
+  const last = days[days.length - 1]
+  if (!first || !last) return ""
   const fmt = new Intl.DateTimeFormat("pl-PL", {
     day: "numeric",
     month: "long",
   })
-  const first = days[0].date
-  const last = days[days.length - 1].date
-  return `${fmt.format(first)} – ${fmt.format(last)} ${first.getFullYear()}`
+  return `${fmt.format(first.date)} – ${fmt.format(last.date)} ${first.date.getFullYear()}`
 }
 
 export function getEnabledDays(
