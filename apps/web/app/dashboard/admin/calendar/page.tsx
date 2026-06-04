@@ -1,5 +1,8 @@
+import type { Metadata } from "next"
 import { getCalendarData } from "@/features/dashboard/calendar/queries"
 import { CalendarView } from "@/features/dashboard/calendar/components/calendar-view"
+
+export const metadata: Metadata = { title: "Kalendarz" }
 
 export default async function CalendarPage({
   searchParams,
