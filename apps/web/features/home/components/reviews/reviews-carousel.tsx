@@ -1,8 +1,9 @@
 "use client"
 
 import Autoplay from "embla-carousel-autoplay"
-import { useRef, useState } from "react"
+import { useState } from "react"
 import type { EmblaCarouselType } from "embla-carousel"
+import type { AutoplayType } from "embla-carousel-autoplay"
 import {
   Carousel,
   CarouselContent,
@@ -21,7 +22,7 @@ type Props = {
 }
 
 export function ReviewsCarousel({ reviews }: Props) {
-  const plugin = useRef(
+  const [plugin] = useState<AutoplayType>(() =>
     Autoplay({
       delay: AUTOPLAY_DELAY,
       stopOnInteraction: true,
@@ -35,8 +36,8 @@ export function ReviewsCarousel({ reviews }: Props) {
     <Carousel
       setApi={setApi}
       opts={{ loop: true }}
-      plugins={[plugin.current]}
-      onMouseLeave={() => plugin.current.play()}
+      plugins={[plugin]}
+      onMouseLeave={() => plugin.play()}
       className="w-full"
     >
       <CarouselContent>
@@ -51,7 +52,7 @@ export function ReviewsCarousel({ reviews }: Props) {
         ))}
       </CarouselContent>
 
-      <ReviewsNavigation resumeDelay={RESUME_DELAY} plugin={plugin.current} />
+      <ReviewsNavigation resumeDelay={RESUME_DELAY} plugin={plugin} />
     </Carousel>
   )
 }

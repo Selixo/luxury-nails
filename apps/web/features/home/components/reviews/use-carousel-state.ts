@@ -8,8 +8,10 @@ export function useCarouselState(api: EmblaCarouselType | undefined) {
   useEffect(() => {
     if (!api) return
 
-    const onSelect = () => setCurrent(api.selectedScrollSnap())
-    setTotal(api.scrollSnapList().length)
+    const onSelect = () => {
+      setTotal(api.scrollSnapList().length)
+      setCurrent(api.selectedScrollSnap())
+    }
     onSelect()
     api.on("select", onSelect)
     return () => {

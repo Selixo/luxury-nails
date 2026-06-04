@@ -24,7 +24,7 @@ export function CookieBar({
         za Twoją zgodą — analizować ruch i personalizować treści. Więcej
         informacji w{" "}
         <Link
-          href="/polityka-prywatnosci"
+          href="/privacy-policy"
           className="text-white/75 underline underline-offset-2 transition-colors outline-none hover:text-gold focus-visible:text-gold"
         >
           polityce prywatności

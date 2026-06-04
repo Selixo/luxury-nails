@@ -233,7 +233,7 @@ type Props = {
 
 export function SummaryPdfDocument({
   monthLabel,
-  year,
+  year: _,
   revenue,
   completedCount,
   avgValue,

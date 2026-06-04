@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { Button } from "@workspace/ui/components/button"
 import { ArrowRight, Eye, EyeOff } from "lucide-react"
 import { useStepRegister } from "../hooks/use-step-register"
@@ -22,6 +23,7 @@ export function StepRegister({ onSuccess, onCreated }: Props) {
     visible,
     isPending,
     setField,
+    setRodo,
     toggleVisible,
     handleSubmit,
   } = useStepRegister({ onSuccess, onCreated })
@@ -139,6 +141,37 @@ export function StepRegister({ onSuccess, onCreated }: Props) {
             </p>
           )}
         </div>
+      </div>
+
+      <div className="mb-6">
+        <label className="flex cursor-pointer items-start gap-3">
+          <input
+            id="rodo"
+            type="checkbox"
+            checked={fields.rodo}
+            onChange={(e) => setRodo(e.target.checked)}
+            aria-describedby={errors.rodo ? "rodo-error" : undefined}
+            aria-invalid={!!errors.rodo}
+            className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-gold"
+          />
+          <span className="text-xs leading-relaxed font-light text-white/40">
+            Akceptuję{" "}
+            <Link
+              href="/privacy-policy"
+              target="_blank"
+              className="text-white/60 underline underline-offset-2 transition-colors hover:text-gold"
+            >
+              politykę prywatności
+            </Link>{" "}
+            i wyrażam zgodę na przetwarzanie moich danych osobowych w celu
+            realizacji rezerwacji.
+          </span>
+        </label>
+        {errors.rodo && (
+          <p id="rodo-error" role="alert" className={errorClass}>
+            {errors.rodo}
+          </p>
+        )}
       </div>
 
       {errors.submit && (

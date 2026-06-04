@@ -15,6 +15,7 @@ export function useStepRegister({ onSuccess, onCreated }: Props) {
     lastName: "",
     password: "",
     confirm: "",
+    rodo: false,
   })
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [visible, setVisible] = useState(false)
@@ -68,6 +69,10 @@ export function useStepRegister({ onSuccess, onCreated }: Props) {
     visible,
     isPending,
     setField,
+    setRodo: (value: boolean) => {
+      setFields((f) => ({ ...f, rodo: value }))
+      setErrors((e) => ({ ...e, rodo: "" }))
+    },
     toggleVisible: () => setVisible((v) => !v),
     handleSubmit,
   }

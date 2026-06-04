@@ -17,7 +17,7 @@ const CATEGORY_LABELS: Record<GalleryItem["category"], string> = {
   manicure: "Manicure",
 }
 
-export function GalleryCard({ item, index, priority, onClick }: Props) {
+export function GalleryCard({ item, priority, onClick }: Props) {
   return (
     <button
       onClick={onClick}
