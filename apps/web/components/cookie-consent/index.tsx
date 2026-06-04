@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { getConsent, saveConsent } from "@/lib/consent"
 import { CookieSettings, PrefKey } from "./cookie-settings"
 import { CookieBar } from "./cookie-bar"
@@ -9,16 +9,12 @@ const GOLD_GRADIENT =
   "linear-gradient(to right, transparent, oklch(0.72 0.1 85 / 0.25), transparent)"
 
 export function CookieConsent() {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(() => !getConsent())
   const [expanded, setExpanded] = useState(false)
   const [prefs, setPrefs] = useState<Record<PrefKey, boolean>>({
     analytics: false,
     marketing: false,
   })
-
-  useEffect(() => {
-    if (!getConsent()) setVisible(true)
-  }, [])
 
   function save(values: Record<PrefKey, boolean>) {
     saveConsent(values)

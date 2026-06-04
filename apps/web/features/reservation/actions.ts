@@ -224,7 +224,7 @@ export async function completeRegistration(
       name: parsedName.data,
       last_name: parsedLastName.data,
       role: "client",
-    } as any)
+    })
     if (profileError) {
       console.error("completeRegistration: insert profile error:", profileError)
       return fail("Nie udało się utworzyć profilu. Spróbuj ponownie.")

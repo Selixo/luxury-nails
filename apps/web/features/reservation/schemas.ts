@@ -33,6 +33,11 @@ export const registerSchema = z
     lastName: lastNameSchema,
     password: registerPasswordSchema,
     confirm: z.string(),
+    rodo: z.literal(true, {
+      errorMap: () => ({
+        message: "Wymagana zgoda na przetwarzanie danych osobowych.",
+      }),
+    }),
   })
   .refine((d) => d.password === d.confirm, {
     message: "Hasła nie są identyczne.",

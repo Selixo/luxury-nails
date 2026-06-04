@@ -16,13 +16,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${SALON.url}/polityka-prywatnosci`,
+      url: `${SALON.url}/privacy-policy`,
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.2,
     },
     {
-      url: `${SALON.url}/regulamin`,
+      url: `${SALON.url}/statute`,
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.2,

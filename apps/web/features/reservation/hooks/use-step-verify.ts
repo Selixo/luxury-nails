@@ -45,7 +45,7 @@ export function useStepVerify({ phone, onNewUser }: Props) {
       return
     }
     startTransition(async () => {
-      const { error: err, isNewUser } = await verifyOtp(phone, pin)
+      const { error: err } = await verifyOtp(phone, pin)
       if (err) {
         setError(err)
         setPin("")

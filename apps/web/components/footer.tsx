@@ -93,7 +93,7 @@ export function Footer() {
             <ul role="list" className="flex items-center gap-4">
               <li>
                 <Link
-                  href="/polityka-prywatnosci"
+                  href="/privacy-policy"
                   className="text-xs font-light text-white/55 transition-colors duration-300 outline-none hover:text-white/80 focus-visible:text-gold"
                 >
                   Polityka prywatności
@@ -102,7 +102,7 @@ export function Footer() {
               <li aria-hidden="true" className="h-3 w-px bg-white/10" />
               <li>
                 <Link
-                  href="/regulamin"
+                  href="/statute"
                   className="text-xs font-light text-white/55 transition-colors duration-300 outline-none hover:text-white/80 focus-visible:text-gold"
                 >
                   Regulamin
