@@ -16,7 +16,7 @@ import { ExportButtons } from "@/features/dashboard/summary/components/export-bu
 
 export const dynamic = "force-dynamic"
 
-export const metadata: Metadata = { title: "Summary" }
+export const metadata: Metadata = { title: "Podsumowanie" }
 
 function Section({
   title,

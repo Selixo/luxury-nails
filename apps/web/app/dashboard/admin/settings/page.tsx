@@ -1,9 +1,12 @@
-export const dynamic = "force-dynamic"
-
+import type { Metadata } from "next"
 import { getSettings, getServices } from "@/features/dashboard/settings/actions"
 import { WorkingHoursSection } from "@/features/dashboard/settings/components/working-hours-section"
 import { ServicesSection } from "@/features/dashboard/settings/components/services-section"
 import { GoogleCalendarSection } from "@/features/dashboard/settings/components/google-calendar-section"
+
+export const dynamic = "force-dynamic"
+
+export const metadata: Metadata = { title: "Ustawienia" }
 
 export default async function UstawieniaPage({
   searchParams,
