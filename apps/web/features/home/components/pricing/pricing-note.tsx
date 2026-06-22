@@ -30,7 +30,7 @@ export function PricingNote() {
           variant="gold-fill"
           className="shrink-0 border-gold/70 px-8 py-3.5 tracking-widest uppercase md:px-10 md:py-4"
         >
-          <Link href="/rezerwacja">
+          <Link href="/reservation">
             <span className="relative z-10">Umów wizytę</span>
           </Link>
         </Button>
