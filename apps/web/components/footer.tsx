@@ -8,7 +8,6 @@ export function Footer() {
 
   return (
     <footer aria-label="Stopka strony" className="bg-[#050507] text-white">
-      {/* Top gold gradient rule */}
       <div
         aria-hidden="true"
         className="h-px w-full"
@@ -18,17 +17,14 @@ export function Footer() {
         }}
       />
 
-      {/* Main content */}
       <div className="mx-auto max-w-6xl px-6 py-14 md:px-12 md:py-20 lg:px-20">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-[2fr_1fr]">
-          {/* Col 1 — Brand */}
           <div className="flex flex-col gap-6">
             <Logo />
             <p className="max-w-xs text-sm leading-relaxed font-light text-white/60">
               {SALON.description}
             </p>
 
-            {/* Socials */}
             <nav aria-label="Media społecznościowe w stopce">
               <ul role="list" className="flex items-center gap-3">
                 {SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
@@ -48,7 +44,6 @@ export function Footer() {
             </nav>
           </div>
 
-          {/* Col 2 — Navigation */}
           <div>
             <p className="mb-5 text-xs font-light tracking-[0.3em] text-gold uppercase">
               Nawigacja
@@ -67,7 +62,7 @@ export function Footer() {
                 ))}
                 <li>
                   <Link
-                    href="/rezerwacja"
+                    href="/reservation"
                     className="text-sm font-light text-gold/80 transition-colors duration-300 outline-none hover:text-gold focus-visible:text-gold"
                   >
                     Zarezerwuj wizytę
@@ -79,7 +74,6 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Bottom bar */}
       <div
         aria-hidden="true"
         className="mx-auto h-px max-w-6xl bg-white/[0.04] px-6 md:px-12 lg:px-20"

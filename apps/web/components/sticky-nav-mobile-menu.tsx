@@ -81,7 +81,7 @@ export function StickyNavMobileMenu({
             variant="gold-fill"
             className="w-full animate-fade-up py-4 tracking-widest uppercase [animation-delay:0.4s]"
           >
-            <Link href="#rezerwacja" onClick={() => onOpenChange(false)}>
+            <Link href="/reservation" onClick={() => onOpenChange(false)}>
               Zarezerwuj wizytę
             </Link>
           </Button>

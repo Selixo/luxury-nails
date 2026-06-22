@@ -302,9 +302,11 @@ export const ABOUT_STATS: AboutStat[] = [
 ]
 
 export const SOCIAL_LINKS = [
-  { label: "Instagram", href: "#", icon: Instagram },
-  { label: "Facebook", href: "#", icon: Facebook },
-  { label: "TikTok", href: "#", icon: TikTok },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/luxurynails.klenica/",
+    icon: Instagram,
+  },
 ]
 
 export type Review = {

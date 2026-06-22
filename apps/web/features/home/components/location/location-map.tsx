@@ -16,7 +16,7 @@ const LeafletMap = dynamic(() => import("./leaflet-map"), {
 
 export function LocationMap(props: Props) {
   return (
-    <div className="relative h-[280px] overflow-hidden sm:h-[360px] lg:h-full">
+    <div className="relative isolate h-[280px] overflow-hidden sm:h-[360px] lg:h-full">
       <LeafletMap {...props} />
     </div>
   )
