@@ -1,7 +1,7 @@
 export function HeroScrollIndicator() {
   return (
     <a
-      href="#doswiadczenie"
+      href="#gallery"
       aria-hidden="true"
       tabIndex={-1}
       className="group relative z-10 hidden animate-fade-up flex-col items-center gap-2 self-center pb-8 animation-duration-[1s] [animation-delay:2s] md:flex"

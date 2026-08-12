@@ -38,14 +38,19 @@ const sections = [
       "Masz prawo do: dostępu do swoich danych, ich sprostowania, usunięcia (prawo do bycia zapomnianym), ograniczenia przetwarzania, przenoszenia danych, wniesienia sprzeciwu. W sprawach dotyczących danych skontaktuj się z nami mailowo.",
   },
   {
-    title: "Cookies",
+    title: "Cookies i analityka",
     content:
-      "Strona może używać technicznych plików cookie niezbędnych do jej prawidłowego działania. Nie stosujemy plików cookie w celach śledzących ani reklamowych.",
+      "Strona używa technicznych plików cookie niezbędnych do jej prawidłowego działania (m.in. sesja logowania). Za Twoją zgodą możemy również korzystać z plików cookie analitycznych (Google Analytics) oraz marketingowych, które pomagają nam mierzyć ruch i doskonalić usługi. Możesz w każdej chwili zmienić swoje preferencje cookie za pomocą panelu zarządzania zgodami dostępnego w stopce strony.",
+  },
+  {
+    title: "Podmioty przetwarzające dane",
+    content:
+      "Korzystamy z usług zewnętrznych dostawców, którzy mogą przetwarzać Twoje dane jako podmioty przetwarzające: Supabase Inc. (infrastruktura bazy danych i uwierzytelnianie), Google LLC (analityka — Google Analytics, opcjonalnie Google Calendar). Dostawcy ci działają na podstawie stosownych umów powierzenia przetwarzania danych.",
   },
   {
     title: "Zmiany polityki",
     content:
-      "Zastrzegamy sobie prawo do zmiany niniejszej polityki. Aktualna wersja jest zawsze dostępna pod tym adresem. Data ostatniej aktualizacji: styczeń 2025.",
+      "Zastrzegamy sobie prawo do zmiany niniejszej polityki. Aktualna wersja jest zawsze dostępna pod tym adresem. Data ostatniej aktualizacji: lipiec 2025.",
   },
 ]
 

@@ -3,12 +3,12 @@ import Facebook from "@/public/icons/facebook.svg"
 import TikTok from "@/public/icons/tiktok.svg"
 
 export const NAV_LINKS = [
-  { label: "Galeria", href: "#gallery" },
-  { label: "O mnie", href: "#about" },
-  { label: "Doświadczenie", href: "#experience" },
-  { label: "Opinie", href: "#reviews" },
-  { label: "Cennik", href: "#pricing" },
-  { label: "Lokalizacja", href: "#location" },
+  { label: "Galeria", href: "/#gallery" },
+  { label: "O mnie", href: "/#about" },
+  { label: "Doświadczenie", href: "/#experience" },
+  { label: "Opinie", href: "/#reviews" },
+  { label: "Cennik", href: "/#pricing" },
+  { label: "Lokalizacja", href: "/#location" },
 ]
 
 export const STATS = [

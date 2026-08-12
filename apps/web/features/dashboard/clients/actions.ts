@@ -6,6 +6,23 @@ import { createAdminClient } from "@/lib/supabase/admin"
 import { CLIENTS_LIMIT } from "./constants"
 import type { AdminClient, ClientFilter, ClientCounts } from "./types"
 
+async function verifyAdmin(): Promise<boolean> {
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+  if (!user) return false
+
+  const admin = createAdminClient()
+  const { data } = await admin
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .single()
+
+  return data?.role === "admin"
+}
+
 type ClientsPageData = {
   clients: AdminClient[]
   total: number
@@ -133,11 +150,12 @@ export async function banClient(
   reason: string,
   note: string
 ): Promise<{ error: string | null }> {
+  if (!(await verifyAdmin())) return { error: "Brak uprawnień." }
+
   const supabase = await createClient()
   const {
     data: { user },
   } = await supabase.auth.getUser()
-  if (!user) return { error: "Brak autoryzacji" }
 
   const admin = createAdminClient()
   const { error } = await admin.from("bans").insert({
@@ -155,11 +173,12 @@ export async function banClient(
 export async function unbanClient(
   banId: string
 ): Promise<{ error: string | null }> {
+  if (!(await verifyAdmin())) return { error: "Brak uprawnień." }
+
   const supabase = await createClient()
   const {
     data: { user },
   } = await supabase.auth.getUser()
-  if (!user) return { error: "Brak autoryzacji" }
 
   const admin = createAdminClient()
   const { error } = await admin
