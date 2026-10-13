@@ -56,22 +56,40 @@ export async function getAvailableSlots(
 
   const admin = createAdminClient()
 
-  const [{ data: settings }, { data: bookings }] = await Promise.all([
-    admin.from("settings").select("working_hours, break_min").limit(1).single(),
-    admin
-      .from("bookings")
-      .select("time, services(duration_min)")
-      .eq("date", date)
-      .neq("status", "cancelled"),
-  ])
+  const [{ data: settings }, { data: bookings }, { data: override }] =
+    await Promise.all([
+      admin
+        .from("settings")
+        .select("working_hours, break_min")
+        .limit(1)
+        .single(),
+      admin
+        .from("bookings")
+        .select("time, services(duration_min)")
+        .eq("date", date)
+        .neq("status", "cancelled"),
+      admin
+        .from("daily_overrides" as never)
+        .select("start, end, enabled")
+        .eq("date", date)
+        .maybeSingle() as unknown as Promise<{
+        data: { start: string; end: string; enabled: boolean } | null
+        error: unknown
+      }>,
+    ])
 
   if (!settings) return []
 
-  const workingHours = settings.working_hours as Record<
-    string,
-    WorkingDay | undefined
-  >
-  const workingDay = workingHours[getDayKey(date)]
+  let workingDay: WorkingDay | undefined
+  if (override) {
+    workingDay = override
+  } else {
+    const workingHours = settings.working_hours as Record<
+      string,
+      WorkingDay | undefined
+    >
+    workingDay = workingHours[getDayKey(date)]
+  }
 
   if (!workingDay || !workingDay.enabled) return []
 
@@ -101,6 +119,64 @@ export async function getAvailableSlots(
   }
 
   return slots
+}
+
+export async function getBookingConstraints(): Promise<{
+  maxDate: string | null
+  disabledDates: string[]
+}> {
+  const admin = createAdminClient()
+  const DAYS_PL = ["niedz", "pon", "wt", "sr", "czw", "pt", "sob"] as const
+
+  const [{ data: overrides }, { data: settings }] = await Promise.all([
+    admin
+      .from("daily_overrides" as never)
+      .select("date, enabled")
+      .order("date", { ascending: true }) as unknown as Promise<{
+      data: { date: string; enabled: boolean }[] | null
+      error: unknown
+    }>,
+    admin.from("settings").select("working_hours").limit(1).single(),
+  ])
+
+  if (!overrides || overrides.length === 0) {
+    // Brak grafiku — blokujemy kalendarz do końca bieżącego miesiąca
+    const now = new Date(
+      new Date().toLocaleDateString("sv-SE", { timeZone: "Europe/Warsaw" }) +
+        "T00:00:00"
+    )
+    const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0)
+    const maxDate = endOfMonth.toLocaleDateString("sv-SE")
+    return { maxDate, disabledDates: [] }
+  }
+
+  const maxDate = overrides[overrides.length - 1]!.date
+  const overrideMap = new Map(overrides.map((o) => [o.date, o.enabled]))
+  const weeklyHours = (settings?.working_hours ?? {}) as Record<
+    string,
+    WorkingDay | undefined
+  >
+
+  const todayStr = new Date().toLocaleDateString("sv-SE", {
+    timeZone: "Europe/Warsaw",
+  })
+
+  const disabledDates: string[] = []
+  const cursor = new Date(todayStr + "T00:00:00")
+  const end = new Date(maxDate + "T00:00:00")
+
+  while (cursor <= end) {
+    const dateStr = cursor.toLocaleDateString("sv-SE")
+    const enabled = overrideMap.has(dateStr)
+      ? overrideMap.get(dateStr)!
+      : (weeklyHours[DAYS_PL[cursor.getDay()]!]?.enabled ?? false)
+
+    if (!enabled) disabledDates.push(dateStr)
+
+    cursor.setDate(cursor.getDate() + 1)
+  }
+
+  return { maxDate, disabledDates }
 }
 
 export async function deleteInspirationImage(url: string): Promise<void> {

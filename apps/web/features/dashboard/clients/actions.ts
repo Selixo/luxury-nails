@@ -156,6 +156,7 @@ export async function banClient(
   const {
     data: { user },
   } = await supabase.auth.getUser()
+  if (!user) return { error: "Brak autoryzacji." }
 
   const admin = createAdminClient()
   const { error } = await admin.from("bans").insert({
@@ -179,6 +180,7 @@ export async function unbanClient(
   const {
     data: { user },
   } = await supabase.auth.getUser()
+  if (!user) return { error: "Brak autoryzacji." }
 
   const admin = createAdminClient()
   const { error } = await admin

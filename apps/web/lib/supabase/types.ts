@@ -129,6 +129,30 @@ export type Database = {
           },
         ]
       }
+      daily_overrides: {
+        Row: {
+          created_at: string
+          date: string
+          enabled: boolean
+          end: string
+          start: string
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          enabled?: boolean
+          end: string
+          start: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          enabled?: boolean
+          end?: string
+          start?: string
+        }
+        Relationships: []
+      }
       login_attempts: {
         Row: {
           count: number
@@ -271,6 +295,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      auto_complete_stale_bookings: { Args: never; Returns: undefined }
       is_admin: { Args: never; Returns: boolean }
     }
     Enums: {

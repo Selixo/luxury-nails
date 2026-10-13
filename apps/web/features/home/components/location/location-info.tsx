@@ -5,15 +5,17 @@ import { Clock, MapPin, Navigation, Phone } from "lucide-react"
 import { useInView } from "@/hooks/useInView"
 import { formatDays } from "@/lib/days"
 import type { SALON } from "@/config/salon"
+import type { OpeningHourSlot } from "../../location"
 
 type Props = {
   salon: typeof SALON
   mapsUrl: string
+  openingHours: OpeningHourSlot[]
 }
 
-export function LocationInfo({ salon, mapsUrl }: Props) {
+export function LocationInfo({ salon, mapsUrl, openingHours }: Props) {
   const { ref, inView } = useInView()
-  const { address, phone, openingHours } = salon
+  const { address, phone } = salon
 
   return (
     <div
@@ -62,25 +64,34 @@ export function LocationInfo({ salon, mapsUrl }: Props) {
               aria-hidden="true"
               className="mt-0.5 shrink-0 text-gold/50"
             />
-            <ul className="flex flex-col gap-1.5" aria-label="Godziny otwarcia">
-              {openingHours.map((slot) => (
-                <li
-                  key={slot.days[0]}
-                  className="flex gap-4 text-sm font-light text-white/65"
-                >
-                  <span className="w-16 shrink-0 text-white/55">
-                    {formatDays(slot.days)}
-                  </span>
-                  <span>
-                    {slot.open} – {slot.close}
-                  </span>
+            <div className="flex flex-col gap-3">
+              <ul
+                className="flex flex-col gap-1.5"
+                aria-label="Godziny otwarcia"
+              >
+                {openingHours.map((slot) => (
+                  <li
+                    key={slot.days[0]}
+                    className="flex gap-4 text-sm font-light text-white/65"
+                  >
+                    <span className="w-16 shrink-0 text-white/55">
+                      {formatDays(slot.days)}
+                    </span>
+                    <span>
+                      {slot.open} – {slot.close}
+                    </span>
+                  </li>
+                ))}
+                <li className="flex gap-4 text-sm font-light">
+                  <span className="w-16 shrink-0 text-white/55">Niedz</span>
+                  <span className="text-white/50">Zamknięte</span>
                 </li>
-              ))}
-              <li className="flex gap-4 text-sm font-light">
-                <span className="w-16 shrink-0 text-white/55">Niedz</span>
-                <span className="text-white/50">Zamknięte</span>
-              </li>
-            </ul>
+              </ul>
+              <p className="text-xs font-light text-white/30">
+                Godziny mogą się różnić. Aktualną dostępność sprawdzisz przy
+                rezerwacji.
+              </p>
+            </div>
           </li>
 
           <li className="flex items-center gap-4">

@@ -15,6 +15,8 @@ type Props = {
   value: string
   onChange: (value: string) => void
   min?: string
+  max?: string
+  disabledDates?: string[]
   placeholder?: string
   error?: boolean
   className?: string
@@ -32,6 +34,8 @@ export function DatePicker({
   value,
   onChange,
   min,
+  max,
+  disabledDates,
   placeholder = "Wybierz datę",
   error,
   className,
@@ -40,6 +44,13 @@ export function DatePicker({
 
   const selected = value ? new Date(value + "T00:00:00") : undefined
   const minDate = min ? new Date(min + "T00:00:00") : undefined
+  const maxDate = max ? new Date(max + "T00:00:00") : undefined
+
+  const disabledMatchers = [
+    ...(minDate ? [{ before: minDate }] : []),
+    ...(maxDate ? [{ after: maxDate }] : []),
+    ...(disabledDates?.map((d) => new Date(d + "T00:00:00")) ?? []),
+  ]
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -80,8 +91,9 @@ export function DatePicker({
             }
             setOpen(false)
           }}
-          disabled={minDate ? { before: minDate } : undefined}
+          disabled={disabledMatchers.length > 0 ? disabledMatchers : undefined}
           defaultMonth={selected ?? minDate}
+          endMonth={maxDate}
         />
       </PopoverContent>
     </Popover>

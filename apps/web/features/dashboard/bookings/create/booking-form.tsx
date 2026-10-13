@@ -5,7 +5,7 @@ import { useForm, useWatch } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@workspace/ui/components/button"
 import { bookingFormSchema, type BookingFormValues } from "./schemas"
-import { createBooking, type Service } from "./actions"
+import { createBooking, getBookingConstraints, type Service } from "./actions"
 import { useAvailableSlots } from "./hooks/use-available-slots"
 import { ServicePicker } from "./components/service-picker"
 import { TimeSlotPicker } from "./components/time-slot-picker"
@@ -36,6 +36,19 @@ function formatDate(iso: string): string {
 export function BookingForm({ services, userName, defaultServiceId }: Props) {
   const [submitted, setSubmitted] = useState(false)
   const [isPending, startTransition] = useTransition()
+  const [constraints, setConstraints] = useState<{
+    maxDate: string | null
+    disabledDates: string[]
+  }>({ maxDate: null, disabledDates: [] })
+
+  useEffect(() => {
+    getBookingConstraints()
+      .then(setConstraints)
+      .catch(() => {
+        const todayStr = new Date().toISOString().split("T")[0]!
+        setConstraints({ maxDate: todayStr, disabledDates: [] })
+      })
+  }, [])
 
   const {
     control,
@@ -129,6 +142,8 @@ export function BookingForm({ services, userName, defaultServiceId }: Props) {
             value={date}
             onChange={(val) => setValue("date", val, { shouldValidate: true })}
             min={new Date().toISOString().split("T")[0]}
+            max={constraints.maxDate ?? undefined}
+            disabledDates={constraints.disabledDates}
             error={!!errors.date}
           />
           {errors.date && (
