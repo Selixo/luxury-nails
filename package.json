@@ -8,7 +8,8 @@
     "lint": "turbo lint",
     "format": "turbo format",
     "typecheck": "turbo typecheck",
-    "prepare": "husky"
+    "prepare": "husky",
+    "set-schedule": "tsx scripts/set-schedule.ts"
   },
   "lint-staged": {
     "*.{ts,tsx,js,mjs,cjs,json,css,md}": [
@@ -16,14 +17,17 @@
     ]
   },
   "devDependencies": {
+    "@anthropic-ai/sdk": "^0.116.0",
     "@commitlint/cli": "^21.0.1",
     "@commitlint/config-conventional": "^21.0.1",
     "@workspace/eslint-config": "*",
     "@workspace/typescript-config": "*",
+    "dotenv": "^17.4.2",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.4",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
+    "tsx": "^4.23.12",
     "turbo": "^2.8.17",
     "typescript": "5.9.3"
   },
